@@ -21,11 +21,11 @@ const Registro = () => {
             <input type="name" className="form-control" id="nombreCompleto" aria-describedby="name" />
           </div>
           <div className="mb-3">
-            <label for="nombreCompleto" className="form-label">Nombre Completo</label>
+            <label for="nombreCompleto" className="form-label">Correo </label>
             <input type="name" className="form-control" id="nombreCompleto" aria-describedby="name" />
           </div>
           <div className="mb-3">
-            <label for="nombreCompleto" className="form-label">Nombre Completo</label>
+            <label for="nombreCompleto" className="form-label">Contraseña</label>
             <input type="name" className="form-control" id="nombreCompleto" aria-describedby="name" />
           </div>
           <div className="mb-3 form-check">
