@@ -1,0 +1,87 @@
+.categoriaSecciones img {
+    width: 100%;
+    opacity: .7;
+    height: 700px;
+}
+
+.categoriaSecciones {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contenedor {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.seccionMujer {
+    width: 25%;
+    height: 30%;
+    display: flex;
+    position: relative;  
+    justify-content: center;
+    align-items: center;  
+}
+
+
+.seccionMujer div {
+    font-size: 80px;
+    display: flex;
+    position: absolute;
+    color: white;
+}
+
+.seccionMujer img {
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+}
+
+
+.seccionHombre {
+    width: 25%;
+    height: 30%;
+    display: flex;
+    position: relative;  
+    justify-content: center;
+    align-items: center;  
+}
+
+.seccionHombre div {
+    font-size: 80px;
+    display: flex;
+    position: absolute;
+    color: white;
+}
+
+.seccionHombre img {
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+}
+.seccionEco {
+    width: 25%;
+    height: 30%;
+    display: flex;
+    position: relative;  
+    justify-content: center;
+    align-items: center;  
+}
+
+.seccionEco img {
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+}
+
+.seccionEco div {
+    font-size: 70px;
+    display: flex;
+    position: absolute;
+    color: white;
+}

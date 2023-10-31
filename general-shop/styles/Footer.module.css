@@ -1,0 +1,26 @@
+.footer {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contacto, .empresa, .soporte, .redes {
+    color: white;
+    width: 24.9%;
+    text-align: center;
+    font-size: 50px;
+    background-color: #2e2e2e ;
+}
+
+.instagram, .facebook, .tiktok {
+   width: 16%;
+}
+
+.numero {
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+}
+

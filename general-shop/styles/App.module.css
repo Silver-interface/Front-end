@@ -1,0 +1,36 @@
+#azul {
+    background-color: blue;
+}
+
+#aguamarina {
+    background-color: aquamarine;
+}
+
+#naranja {
+    background-color: #F6A444;
+}
+
+#rojo {
+    background-color: red;
+}
+
+#gris {
+    background-color: grey;
+}
+
+#blanco {
+    background-color: whitesmoke;
+  
+}
+
+#verde {
+    background-color: green;
+}
+
+.Destacados {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2%;
+}

@@ -1,0 +1,61 @@
+.app {
+    background-color: white;
+}
+
+.producto {
+    width: 20%;
+    height: 20%;
+    margin-top: 3%;
+    margin-right: 2%;
+    margin-left: 2%;
+    gap:10px;
+}
+
+.descripcionProducto {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5%;
+    font-size: 30px;
+    align-items: center;
+    margin-left: 12%;
+}
+
+.imagenProducto {
+    width: 100%;
+}
+.infoLog {
+ display: flex;
+ justify-content: center;
+}
+.info {
+    display: flex;
+    width: 35%; 
+}
+
+.colorPrecio {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;  
+}
+
+.color {
+    width: 50px;
+    height:50px;
+    border-radius:61.5px;
+}
+
+.cart {
+    height: 15%;
+    width: 15%;
+}
+
+.precio {
+    font-size: 30px;
+}
+
+.info-log {
+    width: 40%;
+    height: 60%;
+}
