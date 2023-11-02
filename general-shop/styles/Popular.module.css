@@ -10,6 +10,8 @@
     -webkit-text-stroke: 2px black;
     color: white;
     align-items: center;
+    height: 100%;
+    width: 40%;
 }
 .popular {
     display: flex;

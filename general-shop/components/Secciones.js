@@ -10,7 +10,7 @@ function Secciones() {
      height={73} 
      />
      <div className={styles.tituloS}>
-        <h2><strong>SECCIONES</strong></h2>
+        <p><strong>SECCIONES</strong></p>
      </div>
      </div>
     );

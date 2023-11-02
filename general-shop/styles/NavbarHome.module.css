@@ -1,118 +1,141 @@
-
 .contenedorPrincipal {
     background-color: #54514E;
     width: 100%;
     height: 75%;
     display: flex;
-    justify-content: space-around;
-  }
+    justify-content: space-between;
+}
 
 .marca {
-    display:flex;
-    width: 240px;
-    height: 70px;  /*alto*/
+    display: flex;
+    width: 14%;
     justify-content: space-between;
     align-items: center;
+    margin-left: 1%;
 }
 
 .nombreTienda {
     font-family: inter;
-    font-size: 25px;
-    color:white;
-    width: 160 px;
-    top: 25.5px;
+    font-size: 30px;
+    color: white;
 }
 
 .categorias {
-    display:flex;
-    width: 900px;
-    height: 70px;
+    display: flex;
+    width: 40%;
     color: white;
     font-size: 30px;
-    justify-content: space-between;    
-}
-
-.categorias div {
-    display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
+
 .caja {
-    width: 199px;
-    height: 28px;
+    width: 299px;
+    height: 35px;
     border-radius: 14px;
     border-color: none;
     background-color: grey;
-    color:black;
+    color: black;
 }
+
 .busqueda {
-    display:flex;
+    display: flex;
     width: 235px;
-    justify-content: space-between;  
-
-}
-.busqueda div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;  
-}
-
-.usuario {
-    display:flex;
-    justify-content: space-between; 
-    
-}
-.usuario div {
-    display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.botonRegistro{
-    
-    top:15px;
-    width: 120px;
-    height: 39px;
-    position: relative;
+
+.usuario {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 10%;
+}
+
+
+.botonRegistro {
+    top: 15px;
+    width: 60%;
+    height: 60%;
     justify-content: center;
     border-radius: 8px;
     background-color: #F6A444;
-    color: #54514E;
-    font-size: 20px;
+   
+    font-size: 23px;  
 }
 
 .home img {
     width: 100%;
-    padding: 4%;
+    height: 20%;
 }
+
 .home {
-    width: 4.5%;
+    width: 5%;
 }
 
 .carrito {
-    width: 4%;
-    
-    opacity: 1;
+    width: 4.5%;
 }
 
 .carrito img {
     width: 100%;
+    height: 20%;
+    margin-bottom: 8%;
+}
+
+.catalogo {
+    display: flex;
+    justify-content: space-around;
+    width: 18%;
+    align-items: center;
+    padding-top: 1%;
 }
 
 .catalogo img {
-    display: flex;
-    padding-bottom: 5%;
     width: 100%;
+    display: flex;
+    height: 100%;
+    margin-bottom: 10%;
 }
 
-.seccion img{
+
+.seccion {
     display: flex;
-    padding-bottom: 2%;
+    justify-content: space-around;
+    width: 18%;
+    align-items: center;
+    padding-top: 1%;
+}
+
+.seccion img {
     width: 100%;
+    display: flex;
+    height: 100%;
+    margin-bottom: 10%;
+}
+
+
+.oferta {
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1%;
 }
 
 .oferta img {
-    display: flex;
-    padding-bottom: 1%;
     width: 100%;
+    display: flex;
+    height: 100%;
+    margin-bottom: 10%;
+}
+
+.ref {
+    text-decoration: none;
+}
+
+.refB {
+    text-decoration: none;
+    color: #54514E;
 }

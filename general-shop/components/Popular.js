@@ -10,7 +10,7 @@ function Popular() {
         height={73} 
       />
       <div className={styles.titulo}>
-        <h2><strong>LO MAS POPULAR</strong></h2>
+        <p><strong>LO MAS POPULAR</strong></p>
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ import Destacados from '@/components/Destacados.js';
 import Secciones from '@/components/Secciones.js';
 import Categorias from '@/components/Categorias.js';
 import Footer from '@/components/Footer.js';
-import '@/styles/Destacados.module.css';
 
 //renderizar componentes en la pagina principal Home
 const Home = () => {
@@ -27,33 +26,32 @@ const Home = () => {
           <Destacados
             imagen='img10'
             width={246}
-            
             nombre='Camisa - Original japan'
-            color='azul'
+            colores={['blue','#5CDF87','#DF7B5C']}
             precio='$42.000'
           />
           <Destacados
             imagen='img9'
             nombre='Camisa básica'
-            color='rojo'
+            colores={['#710100','#061731','#C69D1E']}
             precio='$28.000'
           />
           <Destacados
             imagen='img11'
             nombre='Camibuso'
-            color='gris'
+            colores={['#B5B3B4','3E3E46','#C6A993']}
             precio='$53.000'
           />
           <Destacados
             imagen='img2'
             nombre='Camisa hipoalergénica'
-            color='blanco'
+            colores={['white']}
             precio='$42.000'
           />
           <Destacados
             imagen='img1'
             nombre='Camisa OnlyStyle'
-            color='verde'
+            colores={['#60898A']}
             precio='$42.000'
           />
         </div>

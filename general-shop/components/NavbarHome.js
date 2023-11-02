@@ -8,11 +8,14 @@ function NavbarHome() {
     <div className={styles.contenedorPrincipal}>
 
       <div className={styles.marca}>
+
         <Image src={require("../public/image/logo.png")}
           width={59}
           height={52}
         />
-        <h1 className={styles.nombreTienda}><b>General Shop</b></h1>
+        <a className={styles.ref} href='/'>
+          <h1 className={styles.nombreTienda}><b>General Shop</b></h1>
+        </a>
       </div>
 
       <div className={styles.categorias}>
@@ -23,7 +26,6 @@ function NavbarHome() {
               height={30}
             />
           </a>
-
         </div>
         <div className={styles.oferta}>
           <Image src={require('../public/image/price.png')}
@@ -80,7 +82,7 @@ function NavbarHome() {
         </div>
 
         <button className={styles.botonRegistro}>
-          <a href='/registro'><b>Registrate</b> </a>
+          <a className={styles.refB} href='/registro'><b>Registrate</b> </a>
         </button>
       </div>
     </div>
