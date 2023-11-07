@@ -3,7 +3,7 @@
     height: 10%;
     display: flex;
     position: relative;
-    
+
 }
 
 .descripcion {
@@ -14,11 +14,12 @@
     text-align: right;
     top: 65%;
     padding-left: 45%;
-    font-size: 800%;
+    font-size: 600%;
     color: white;
-    
+
 }
 
 .moda {
-    color : #f6a444;
+    color: #f6a444;
 }
+

@@ -23,14 +23,13 @@
     width: 25%;
     height: 30%;
     display: flex;
-    position: relative;  
+    position: relative;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 
-
 .seccionMujer div {
-    font-size: 80px;
+    font-size: 60px;
     display: flex;
     position: absolute;
     color: white;
@@ -42,18 +41,17 @@
     opacity: 1;
 }
 
-
 .seccionHombre {
     width: 25%;
     height: 30%;
     display: flex;
-    position: relative;  
+    position: relative;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 
 .seccionHombre div {
-    font-size: 80px;
+    font-size: 60px;
     display: flex;
     position: absolute;
     color: white;
@@ -64,13 +62,14 @@
     height: 90%;
     opacity: 1;
 }
+
 .seccionEco {
     width: 25%;
     height: 30%;
     display: flex;
-    position: relative;  
+    position: relative;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 
 .seccionEco img {
@@ -80,8 +79,10 @@
 }
 
 .seccionEco div {
-    font-size: 70px;
+    font-size: 50px;
     display: flex;
     position: absolute;
     color: white;
 }
+
+

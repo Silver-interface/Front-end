@@ -5,22 +5,27 @@
     justify-content: space-between;
 }
 
-.contacto, .empresa, .soporte, .redes {
+.contacto,
+.empresa,
+.soporte,
+.redes {
     color: white;
     width: 24.9%;
     text-align: center;
-    font-size: 50px;
-    background-color: #2e2e2e ;
+    font-size: 40px;
+    background-color: #2e2e2e;
 }
 
-.instagram, .facebook, .tiktok {
-   width: 16%;
+.instagram,
+.facebook,
+.tiktok {
+    width: 24%;
+    height: 26%;
 }
 
 .numero {
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     text-align: center;
     margin-top: 10%;
 }
-

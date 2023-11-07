@@ -6,7 +6,7 @@ function Footer() {
     return (
         <div className={styles.footer}>
             <div className={styles.contacto}><p>CONTACTANOS</p>
-                <div className='numero'>PBX: 01 8000 41 37 57</div>
+                <div className={styles.numero}>PBX: 01 8000 41 37 57</div>
             </div>
             
             <div className={styles.empresa}><p>QUIENES SOMOS</p></div>
