@@ -5,7 +5,7 @@ import Image from 'next/image';
 function Secciones() {
     return (
      <div className={styles.secciones}>
-     <Image src={require('../public/image/img12.png')}
+     <Image src={require('@/public/image/img12.png')}
      width={1440}
      height={73} 
      />

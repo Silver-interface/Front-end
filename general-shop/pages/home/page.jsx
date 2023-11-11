@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-import styles from '../styles/App.module.css';
-import NavbarHome from '@/components/NavbarHome.js';
-import Separador from '@/components/Separador.js';
-import Portada from '@/components/Portada.js';
-import Popular from '@/components/Popular.js';
-import Destacados from '@/components/Destacados.js';
-import Secciones from '@/components/Secciones.js';
-import Categorias from '@/components/Categorias.js';
-import Footer from '@/components/Footer.js';
+import styles from '@/src/styles/App.module.css';
+import NavbarHome from '@/src/components/NavbarHome.js';
+import Separador from '@/src/components/Separador.js';
+import Portada from '@/src/components/Portada.js';
+import Popular from '@/src/components/Popular.js';
+import Destacados from '@/src/components/Destacados.js';
+import Secciones from '@/src/components/Secciones.js';
+import Categorias from '@/src/components/Categorias.js';
+import Footer from '@/src/components/Footer.js';
 
 //renderizar componentes en la pagina principal Home
 const Home = () => {

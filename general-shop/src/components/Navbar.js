@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
-      <a className="navbar-brand" href="/">General Shop</a>
+      <a className="navbar-brand" href="/home/page">General Shop</a>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button> 
@@ -17,22 +17,22 @@ const Navbar = () => {
           <li className="nav-item">
           <a className="nav-link" aria-current="page" href="/login">Iniciar Sesión</a>
           </li>
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Secciones
             </a>
-            <ul className="dropdown-menu">
+            {/* <ul className="dropdown-menu">
               <li><a className="dropdown-item" href="#">Ellos</a></li>
               <li><a className="dropdown-item" href="#">Ellas</a></li>
               <li><hr className="dropdown-divider"/></li>
               <li><a className="dropdown-item" href="#">Carrito de Compras</a></li>
-            </ul>
-          </li>
+            </ul> */}
+          {/* </li> */}
         </ul>
-        <form className="d-flex" role="Buscar">
+        {/* <form className="d-flex" role="Buscar">
           <input className="form-control me-2" type="Buscar" placeholder="Talla, Hombre, Mujer, XL..." aria-label="Buscar"/>
-          <button className="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+          <button className="btn btn-outline-success" type="submit">Buscar</button> */}
+        {/* </form> */}
       </div>
     </div>
   </nav>

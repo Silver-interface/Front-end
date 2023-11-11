@@ -12,13 +12,13 @@ function Footer() {
             <div className={styles.empresa}><p>QUIENES SOMOS</p></div>
             <div className={styles.soporte}><p>SOPORTE</p></div>
             <div className={styles.redes}><p>REDES SOCIALES</p>
-                <Image className={styles.tiktok} src={require('../public/image/TikTok.png')}
+                <Image className={styles.tiktok} src={require('@/public/image/TikTok.png')}
                  width={84}
                  height={84}/>
-                <Image className={styles.facebook} src={require('../public/image/Facebook.png')}
+                <Image className={styles.facebook} src={require('@/public/image/Facebook.png')}
                 width={83}
                 height={83} />
-                <Image className={styles.instagram} src={require('../public/image/Instagram.png')} 
+                <Image className={styles.instagram} src={require('@/public/image/Instagram.png')} 
                 width={72}
                 height={72} />
             </div>

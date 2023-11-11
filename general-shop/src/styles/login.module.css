@@ -1,0 +1,64 @@
+.main {
+    background: url("/image/background.jpg") no-repeat;
+    max-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-size: cover;
+}
+.cardlog{
+    max-width: 70%;
+    min-height: 790px;
+    margin: 40px auto;
+    border-radius: 47px;
+    background-color: rgb(255, 255, 255);
+}
+.image{
+    border-radius: 47px;
+
+}
+.form{
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    height:70%;
+    margin-left: 20px;
+}
+
+.ingreso {
+    display: flex;
+    position: static;
+    margin-top: 8%;
+    margin-left: 25%;
+}
+
+.line {
+    margin-top: 3%;
+}
+
+.form input {
+    background-color: #f2eded;
+ }
+
+ .registrate :hover {
+   color: #f6a444;
+   text-decoration: underline;
+   
+ }
+
+ .registrate {
+    margin-top: 4%;
+    text-align: center;
+ }
+
+ .home {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap:2%;
+    margin-top:20%
+}
+
+.home:hover {
+    color: #f6a444;
+    text-decoration: underline;
+}

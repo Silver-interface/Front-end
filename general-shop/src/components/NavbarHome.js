@@ -9,26 +9,26 @@ function NavbarHome() {
 
       <div className={styles.marca}>
 
-        <Image src={require("../public/image/logo.png")}
+        <Image src={require("@/public/image/logo.png")}
           width={59}
           height={52}
         />
-        <a className={styles.ref} href='/'>
+        <a className={styles.ref} href='/home/page'>
           <h1 className={styles.nombreTienda}><b>General Shop</b></h1>
         </a>
       </div>
 
       <div className={styles.categorias}>
         <div className={styles.home}>
-          <a href='/'>
-            <Image src={require('../public/image/home.png')}
+          <a href='/home/page'>
+            <Image src={require('@/public/image/home.png')}
               width={30}
               height={30}
             />
           </a>
         </div>
         <div className={styles.oferta}>
-          <Image src={require('../public/image/price.png')}
+          <Image src={require('@/public/image/price.png')}
             width={23}
             height={23}
           />
@@ -36,7 +36,7 @@ function NavbarHome() {
         </div>
 
         <div className={styles.seccion}>
-          <Image src={require('../public/image/section.png')}
+          <Image src={require('@/public/image/section.png')}
             width={23}
             height={24}
           />
@@ -44,7 +44,7 @@ function NavbarHome() {
         </div>
 
         <div className={styles.catalogo}>
-          <Image src={require('../public/image/Bookmark.png')}
+          <Image src={require('@/public/image/Bookmark.png')}
             width={21}
             height={40}
           />
@@ -52,7 +52,7 @@ function NavbarHome() {
         </div>
 
         <div className={styles.carrito}>
-          <Image src={require('../public/image/Shopping Cart.png')}
+          <Image src={require('@/public/image/Shopping Cart.png')}
             width={25}
             height={20}
           />
@@ -61,7 +61,7 @@ function NavbarHome() {
 
       <div className={styles.busqueda}>
         <div>
-          <Image src={require('../public/image/Search.png')}
+          <Image src={require('@/public/image/Search.png')}
             width={26}
             height={26} />
         </div>
@@ -74,7 +74,7 @@ function NavbarHome() {
       <div className={styles.usuario}>
         <div>
           <a href='/login'>
-            <Image src={require('../public/image/User.png')}
+            <Image src={require('@/public/image/User.png')}
               width={45}
               height={45}
             />

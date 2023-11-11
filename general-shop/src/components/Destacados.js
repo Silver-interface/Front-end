@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/Destacados.module.css';
+import styles from '@/src/styles/Destacados.module.css';
 import Image from 'next/image';
 
 function Destacados(props) {
@@ -7,7 +7,7 @@ function Destacados(props) {
 
     <div className={styles.producto}>
       <Image className={styles.imagenProducto}
-        src={require(`../public/image/${props.imagen}.jpeg`)}
+        src={require(`@/public/image/${props.imagen}.jpeg`)}
         width={246}
         height={278}
       />
@@ -16,7 +16,7 @@ function Destacados(props) {
         <p>{props.nombre}</p>
         <div className={styles.infoLog} >
           < Image
-            src={require('../public/image/info.png')}
+            src={require('@/public/image/info.png')}
             width={23}
             height={23}
           />
@@ -32,7 +32,7 @@ function Destacados(props) {
 
         <p className={styles.precio}><b>{props.precio} </b></p>
         <Image className={styles.cart}
-          src={require('../public/image/Cart.png')}
+          src={require('@/public/image/Cart.png')}
           width={25}
           height={25}
         />

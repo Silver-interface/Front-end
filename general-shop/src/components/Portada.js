@@ -5,7 +5,7 @@ import Image from 'next/image';
 function Portada() {
   return (
     <div className={styles.principal}>
-      <Image src={require('../public/image/principal.png')}
+      <Image src={require('@/public/image/principal.png')}
         width={1440}
         height={774}
       />
