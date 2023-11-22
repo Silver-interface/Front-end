@@ -61,7 +61,7 @@ const Registro = () => {
       });
       return;
     }
-    if (confirmPassword != inputPassword) {
+    else if (confirmPassword != inputPassword) {
       Toast.fire({
         icon: "warning",
         title: "La contraseña no coincide",
@@ -69,7 +69,7 @@ const Registro = () => {
       });
       return;
     }
-
+console.log('Conectando con Base de Datos...')
     try {
       const res = await fetch(`http://localhost:3002/auth/register/`, {
         method: 'POST',
@@ -129,9 +129,9 @@ const Registro = () => {
                 >
 
                   <option defaultValue >Tipo de Identificacion</option>
-                  <option value="Cedula" >Cedula</option>
+                  <option value="Cedula" >Cédula</option>
                   <option value="Pasaporte">Pasaporte</option>
-                  <option value="Cedula Extranjeria">Cedula de Extranjeria</option>
+                  <option value="Cedula Extranjeria">Cédula de Extranjeria</option>
                 </select>
 
               </div>
@@ -149,7 +149,7 @@ const Registro = () => {
                 <label for="validationServerUsername" className="form-label">Datos personales</label>
 
                 <input type="email" className="form-control" placeholder="Correo electrónico" aria-label="Correo Electronico"
-                  onChange={(e) => setEmail(e.target.value)} value={email}
+                  onChange={(e) => setEmail(e.target.value)} value={email} pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" 
                   required />
 
               </div>
@@ -161,7 +161,7 @@ const Registro = () => {
 
 
                 <div id="validationServerUsernameFeedback" className="invalid-feedback">
-                  Por Favor, verifique su nombre.
+                  Por favor, verifique su nombre.
                 </div>
               </div>
 

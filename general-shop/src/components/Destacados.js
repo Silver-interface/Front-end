@@ -14,13 +14,6 @@ function Destacados(props) {
 
       <div className={styles.descripcionProducto}>
         <p>{props.nombre}</p>
-        <div className={styles.infoLog} >
-          < Image
-            src={require('@/public/image/info.png')}
-            width={23}
-            height={23}
-          />
-        </div>
       </div>
 
       <div className={styles.colorPrecio}>
