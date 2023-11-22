@@ -1,0 +1,20 @@
+.secciones img {
+    width: 100%;
+}
+
+.tituloS {
+    font-size: 50px;
+    display: flex;
+    position: absolute;
+    right: 40px;
+    -webkit-text-stroke: 2px black;
+    color: white;
+    align-items: center;
+    justify-content: end;
+}
+.secciones {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: end;
+}

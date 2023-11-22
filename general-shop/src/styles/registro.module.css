@@ -22,5 +22,35 @@
     flex-direction: column;
     height:100%;
     margin-left: 20px;
+    margin-top: 5%;
 
+}
+
+.register {
+    display: flex;
+    position: absolute;
+    margin-top: 2%;
+    margin-left: 8%;
+}
+
+.form select,
+.form input {
+   background-color: #f2eded;
+}
+
+.redlogin:hover {
+    color: #f6a444;
+    text-decoration: underline;
+}
+
+.home {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap:2%;
+}
+
+.home:hover {
+    color: #f6a444;
+    text-decoration: underline;
 }
