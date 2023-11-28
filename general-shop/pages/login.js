@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:3002/auth/login/`, {
+      const res = await fetch(`https://back-mgpv157ny-yessenia-martinezs-projects.vercel.app/auth/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const Login = () => {
         //se obtiene token y se almacena
         const token = data.token;
         localStorage.setItem('token', token);
-        router.push('/home/page');
+        router.push('/');
         console.log("Success")
       }
 
@@ -111,7 +111,7 @@ const Login = () => {
                 <a href='/registro' style={{ color: 'inherit', textDecoration: 'inherit' }} ><strong>REGISTRATE</strong></a>
                </div>
                <div className={styles.home}>
-                < a href='/home/page'><Image src="/image/home.png"
+                < a href='/'><Image src="/image/home.png"
                   width={30}
                   height={30}
                 ></Image></a>Regresar

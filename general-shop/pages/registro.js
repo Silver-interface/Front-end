@@ -71,7 +71,7 @@ const Registro = () => {
     }
 console.log('Conectando con Base de Datos...')
     try {
-      const res = await fetch(`http://localhost:3002/auth/register/`, {
+      const res = await fetch(`https://back-mgpv157ny-yessenia-martinezs-projects.vercel.app/auth/register/`, {
         method: 'POST',
         body: JSON.stringify({ email, password, name, lastName, IdNumber, IdType }),
         headers: {  //valor que espera el backend para que entienda que es un objeto json
@@ -99,9 +99,6 @@ console.log('Conectando con Base de Datos...')
     } catch (error) {
       console.log(error);
     };
-
-
-
   }
 
   return (
@@ -203,7 +200,7 @@ console.log('Conectando con Base de Datos...')
                 </a>
               </div>
               <div className={styles.home}>
-                < a href='/home/page'><Image src="/image/home.png"
+                < a href='/'><Image src="/image/home.png"
                   width={30}
                   height={30}
                 ></Image></a>Regresar

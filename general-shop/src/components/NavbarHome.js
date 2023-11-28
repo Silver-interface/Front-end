@@ -50,6 +50,7 @@ function NavbarHome() {
           />
           <p>CATALOGO</p>
         </div>
+        
 
         <div className={styles.carrito}>
           <Image src={require('@/public/image/Shopping Cart.png')}
@@ -65,10 +66,7 @@ function NavbarHome() {
             width={26}
             height={26} />
         </div>
-
-        <div >
           <input type='text' className={styles.caja}></input>
-        </div>
       </div>
 
       <div className={styles.usuario}>

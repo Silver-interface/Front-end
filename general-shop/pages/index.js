@@ -15,8 +15,7 @@ import Footer from '@/src/components/Footer.js';
 const Home = () => {
   useEffect(() => {
     const root = document.getElementById('root');
-    const rootElement = ReactDOM.createRoot(root);
-    rootElement.render(
+    ReactDOM.render(
       <React.StrictMode>
         <NavbarHome />
         <Separador />
@@ -27,19 +26,19 @@ const Home = () => {
             imagen='img10'
             width={246}
             nombre='Camisa - Original japan'
-            colores={['blue','#5CDF87','#DF7B5C']}
+            colores={['blue', '#5CDF87', '#DF7B5C']}
             precio='$42.000'
           />
           <Destacados
             imagen='img9'
             nombre='Camisa básica'
-            colores={['#710100','#061731','#C69D1E']}
+            colores={['#710100', '#061731', '#C69D1E']}
             precio='$28.000'
           />
           <Destacados
             imagen='img11'
             nombre='Camibuso'
-            colores={['#B5B3B4','3E3E46','#C6A993']}
+            colores={['#B5B3B4', '3E3E46', '#C6A993']}
             precio='$53.000'
           />
           <Destacados
@@ -59,11 +58,12 @@ const Home = () => {
         <Secciones />
         <Categorias />
         <Footer />
-      </React.StrictMode>
+      </React.StrictMode>,
+      root
     );
   }, []);
 
-  return <div id="root"></div>
+  return null;
 };
 
 export default Home;
