@@ -71,7 +71,7 @@ const Registro = () => {
     }
 console.log('Conectando con Base de Datos...')
     try {
-      const res = await fetch(`https://back-mgpv157ny-yessenia-martinezs-projects.vercel.app/auth/register/`, {
+      const res = await fetch("https://vercel.com/yessenia-martinezs-projects/back-end/E5SB8Xhr3YRv2YpgLQX5VaeajnjA/auth/register/", {
         method: 'POST',
         body: JSON.stringify({ email, password, name, lastName, IdNumber, IdType }),
         headers: {  //valor que espera el backend para que entienda que es un objeto json
