@@ -71,7 +71,7 @@ const Registro = () => {
     }
 console.log('Conectando con Base de Datos...')
     try {
-      const res = await fetch("https://vercel.com/yessenia-martinezs-projects/back-end/EDSYuY3y7wHKboF23gsfsHqZMoVM/auth/register/", {
+      const res = await fetch("https://back-b3nbbjlpz-yessenia-martinezs-projects.vercel.app/auth/register/", {
         
         method: 'POST',
         body: JSON.stringify({ email, password, name, lastName, IdNumber, IdType }),
