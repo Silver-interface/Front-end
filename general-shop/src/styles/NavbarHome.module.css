@@ -170,6 +170,7 @@
     border: 1px solid #F6A444;;
     border-radius: 8px;
     background-color: #fff;
+    max-width: 20%;
   }
 
   .verTodos {

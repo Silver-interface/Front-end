@@ -3,7 +3,7 @@ import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
 import { useState } from 'react'
 import Link from 'next/link';
-import Categorias from './Categorias';
+
 
 
 function NavbarHome() {
@@ -23,9 +23,9 @@ function NavbarHome() {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const response = await fetch(`https://rickandmortyapi.com/api/character`);
+        const response = await fetch(`https://fakestoreapi.com/products`);
         const data = await response.json();
-        setProduct(data.results);
+        setProduct(data);
       } catch (error) {
         console.error('error fetch data', error);
       }
@@ -39,7 +39,7 @@ function NavbarHome() {
     } else {
       let matches = product.filter((product) => {
         const regex = new RegExp(`${text}`, "gi");
-        return product.name.match(regex)
+        return product.title.match(regex)
       });
       setProductMatch(matches);
     }
@@ -119,15 +119,15 @@ function NavbarHome() {
         ></input>
 
         <div className={`${styles.resultBusqueda} ${productMatch.length > 0 && styles.active}`}>
-          {productMatch.map((character, id) => (
+          {productMatch.map((product, id) => (
             <div key={id} className={styles.card}>
               <Image
-                src={character.image}
-                alt={character.name}
+                src={product.image}
+                alt={product.title}
                 width={100}
                 height={100}
               />
-              <p>{character.name}</p>
+              <p>{product.title}</p>
             </div>
           ))}
           {productMatch.length > 0 && (
