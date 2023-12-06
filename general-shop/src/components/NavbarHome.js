@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 
+const NavbarHome = () => {
 
-function NavbarHome() {
   return (
     <div className={styles.contenedorPrincipal}>
 
@@ -50,7 +51,7 @@ function NavbarHome() {
           />
           <p>CATALOGO</p>
         </div>
-        
+
 
         <div className={styles.carrito}>
           <Image src={require('@/public/image/Shopping Cart.png')}
@@ -61,12 +62,11 @@ function NavbarHome() {
       </div>
 
       <div className={styles.busqueda}>
-        <div>
+        <Link href={'/search'}>
           <Image src={require('@/public/image/Search.png')}
             width={26}
             height={26} />
-        </div>
-          <input type='text' className={styles.caja}></input>
+        </Link>
       </div>
 
       <div className={styles.usuario}>
