@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`https://back-mgpv157ny-yessenia-martinezs-projects.vercel.app/auth/login/`, {
+      const res = await fetch("https://back-b3nbbjlpz-yessenia-martinezs-projects.vercel.app/auth/login/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
