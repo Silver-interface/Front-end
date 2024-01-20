@@ -1,8 +1,6 @@
 import React from 'react'
 import styles from '@/src/styles/Producto.module.css';
 import Image from 'next/image';
-import info from "@/public/image/info.png";
-import info2 from "@/public/image/Cart.png";
 
 function Producto(props) {
 
@@ -28,11 +26,12 @@ function Producto(props) {
 
           <div className={styles.talla}>
             <p>Tallas: {props.talla}</p>
+            {/*
             <Image
-              src={info}
+              src={require('@/public/image/info.png')}
               width={25}
               height={25}
-            />
+    />*/}
           </div>
 
           <div className={styles.colorPrecio}>
@@ -44,7 +43,7 @@ function Producto(props) {
 
             <p className={styles.precio}><b>{props.precio} </b></p>
             <Image className={styles.cart}
-              src={info2}
+              src={require('@/public/image/Cart.png')}
               width={25}
               height={25}
             />
