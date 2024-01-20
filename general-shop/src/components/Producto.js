@@ -16,8 +16,8 @@ function Producto(props) {
           <div className={styles.imageProducto}>
             <Image
               src={props.imagen}
-              width={247}
-              height={247}
+              width={246}
+              height={246}
               alt={props.nombre}
             />
           </div>
