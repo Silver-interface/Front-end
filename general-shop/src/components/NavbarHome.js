@@ -75,9 +75,8 @@ function NavbarHome() {
             width={23}
             height={24}
           />
-          <Link href='/' className={styles.refSecciones}>
-            <p onClick={seccionesClick}>SECCIONES</p>
-          </Link>
+            <p>SECCIONES</p>
+          
           
         </div>
 
