@@ -11,8 +11,8 @@ import Filtro from '@/src/components/Filtro';
 function ProductosPage() {
   const [products, setProducts] = useState([]);
 
-  //dialog
-  const [dialogOpen, setDialogOpen] = useState(false);
+  //dialog ventana emergente - detalle producto
+  const [dialogOpen, setDialogOpen] = useState(false);  
   const [selectProduct, setSelectProduct] = useState(null);
 
   const productClick = (product) => {

@@ -8,13 +8,6 @@ import Link from 'next/link';
 
 function NavbarHome() {
 
-  //referencia para el apartado "secciones"
-  const categoriasRef = useRef();
-  const seccionesClick = () => {
-    //desplazar la página a la posicion de la referencia
-    categoriasRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
 
   //funcionalidad barra buscadora
   const [product, setProduct] = useState([]);  // variable de estado del input
@@ -33,6 +26,7 @@ function NavbarHome() {
     loadProduct();
   }, [])
 
+  //funcion busqueda
   const searchProduct = (text) => {
     if (!text) {
       setProductMatch([]);
@@ -106,6 +100,7 @@ function NavbarHome() {
         </div>
       </div>
 
+       {/* barra de busqueda */}
       <div className={styles.busqueda}>
         <div>
           <Image src={require('@/public/image/Search.png')}
