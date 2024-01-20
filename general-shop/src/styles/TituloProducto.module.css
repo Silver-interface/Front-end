@@ -1,0 +1,19 @@
+.titleProducto img {
+    width: 100%;
+}
+
+.titulo {
+    font-size: 50px;
+    display: flex;
+    position: absolute;
+    -webkit-text-stroke: 1.5px black;
+    color: white;
+    align-items: center;
+    height: 100%;
+}
+.titleProducto {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}

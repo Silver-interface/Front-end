@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from '@/src/styles/Categorias.module.css';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 function Categorias() {
+ //referencia para el componente Categorias
+  const categoriasRef = useRef();
+
     return (
         <div className={styles.categoriaSecciones}>
             <Image src={require('@/public/image/img11.jpg')}
