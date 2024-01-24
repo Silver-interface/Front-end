@@ -18,10 +18,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://back-b3nbbjlpz-yessenia-martinezs-projects.vercel.app/auth/login/", {
+      const res = await fetch("http://localhost:3002/auth/login/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           email: email,
@@ -29,7 +30,10 @@ const Login = () => {
         }),
       });
 
-      const data = await res.text();
+      const data = await res.json();
+      console.log("Respuesta del servidor", data);
+
+      
 
       if (data === "NOT_FOUND_USER") {
         Swal.fire({
@@ -48,11 +52,17 @@ const Login = () => {
         console.log(data)
       }
       else {
-        //se obtiene token y se almacena
         const token = data.token;
-        localStorage.setItem('token', token);
-        router.push('/');
-        console.log("Success")
+        if (data.token) {
+          // Token obtenido con éxito, almacenarlo en localStorage
+          localStorage.setItem('token', data.token);
+          console.log("token recibido:" , token);
+          setLogged(true);
+          router.push('/');
+          console.log("Success")
+        } else {
+          console.error("El servidor no proporcionó un token en la respuesta.");
+        }
       }
 
     } catch (error) {

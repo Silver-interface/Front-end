@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
-import { useState } from 'react'
-import Link from 'next/link';
+import { useState } from 'react';
+import Modal from './Modal';
 
 
 
 function NavbarHome() {
-
-
+ 
+  
   //funcionalidad barra buscadora
   const [product, setProduct] = useState([]);  // variable de estado del input
   const [productMatch, setProductMatch] = useState([]); //estado para coincidencia
@@ -39,6 +39,38 @@ function NavbarHome() {
     }
   }
 
+  //funcion estado inicio sesión
+  const [logged, setLogged] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [userName, setUserName] = useState("");
+
+
+  //controlador de clic al icono usuario para mostrar ventana emergente
+  const VentanaUsuario = async () => {
+    if (logged) {
+      try {
+        const response = await fetch('http://localhost:3002/user');
+        if (!response.ok) {
+          if (response.status === 401) {
+            // Token no válido o no presente
+            console.log('Token no válido o no presente');
+            window.location.href = '/login';
+          } else {
+            // Otro error
+            throw new Error(`Error al obtener información del usuario. Código de estado: ${response.status}`);
+          }
+        }
+        const data = await response.json();
+        setUserName(data.name);
+        setShowModal(true);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      window.location.href = '/login';
+    }
+  };
+
   return (
     <div className={styles.contenedorPrincipal}>
 
@@ -62,13 +94,14 @@ function NavbarHome() {
             />
           </a>
         </div>
-        <div className={styles.oferta}>
+
+        {/* <div className={styles.oferta}>
           <Image src={require('@/public/image/price.png')}
             width={23}
             height={23}
           />
           <p>OFERTAS</p>
-        </div>
+        </div> */}
 
         <div className={styles.seccion}>
           <Image src={require('@/public/image/section.png')}
@@ -76,8 +109,6 @@ function NavbarHome() {
             height={24}
           />
             <p>SECCIONES</p>
-          
-          
         </div>
 
         <div className={styles.catalogo}>
@@ -131,19 +162,19 @@ function NavbarHome() {
       </div>
 
       <div className={styles.usuario}>
-        <div>
-          <a href='/login'>
+        <div onClick = {VentanaUsuario}>
             <Image src={require('@/public/image/User.png')}
               width={45}
               height={45}
             />
-          </a>
         </div>
 
         <button className={styles.botonRegistro}>
           <a className={styles.refB} href='/registro'><b>Registrate</b> </a>
         </button>
       </div>
+
+      { showModal && <Modal userName={userName} onClose={() => setShowModal(false)} />}
     </div>
   );
 }
