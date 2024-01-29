@@ -5,7 +5,8 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 
 
-const Login = () => {
+
+const Login = ({ onLogin }) => {  //prop onLogin para notificar a _app.js cuando el usuario ha iniciado sesión 
 
   //Declaracion de Hooks
   const router = useRouter();
@@ -33,7 +34,7 @@ const Login = () => {
       const data = await res.json();
       console.log("Respuesta del servidor", data);
 
-      
+
 
       if (data === "NOT_FOUND_USER") {
         Swal.fire({
@@ -53,11 +54,12 @@ const Login = () => {
       }
       else {
         const token = data.token;
+
+
         if (data.token) {
           // Token obtenido con éxito, almacenarlo en localStorage
-          localStorage.setItem('token', data.token);
-          console.log("token recibido:" , token);
-          setLogged(true);
+          localStorage.setItem('token', token);
+          console.log("token recibido:", token);
           router.push('/');
           console.log("Success")
         } else {
@@ -71,30 +73,29 @@ const Login = () => {
 
   }
 
-
   return (
     <section>
 
       <div className={`container ${styles.main}`}>
         <div className={`row ${styles.cardlog}`}>
           <div className={`col p-0 position-relative`}>
-          
+
             <Image src="/image/containerlog.jpg" fill className={styles.image} object-fit="contain" />
           </div>
           <div className="col">
-          <Image src="/image/ingresar.png" className={styles.ingreso}
+            <Image src="/image/ingresar.png" className={styles.ingreso}
               width={285}
               height={62}>
             </Image>
             <Image src="/image/line.png" className={styles.line}
-             width={541}
-             height={2}
-             ></Image>
-            
+              width={541}
+              height={2}
+            ></Image>
+
             <form className={styles.form}
-           
+
               onSubmit={onSubmit}>
-             
+
               <div className="mb-2">
                 <label for="exampleInputEmail1" className="form-label">Correo electrónico</label>
                 <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -116,16 +117,16 @@ const Login = () => {
                 <label className="form-check-label" for="exampleCheck1">Recuerdame.</label>
               </div>
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#f6a444' }}>Iniciar Sesión</button>
-               <div className={styles.registrate}>
+              <div className={styles.registrate}>
                 O si no tienes una cuenta <br></br>
                 <a href='/registro' style={{ color: 'inherit', textDecoration: 'inherit' }} ><strong>REGISTRATE</strong></a>
-               </div>
-               <div className={styles.home}>
+              </div>
+              <div className={styles.home}>
                 < a href='/'><Image src="/image/home.png"
                   width={30}
                   height={30}
                 ></Image></a>Regresar
-                </div>
+              </div>
             </form>
           </div>
         </div>
