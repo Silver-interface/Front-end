@@ -31,13 +31,13 @@ function Categorias() {
                     <div>HOMBRE</div>
                 </div>
 
-                <div className={styles.seccionEco}>
+                {/* <div className={styles.seccionEco}>
                     <Image src={require('@/public/image/ecofriendly.png')}
                         width={279}
                         height={279}
                     />
                     <div>ECOFRIENDLY</div>
-                </div>
+                </div> */}
             </div>
 
         </div>
