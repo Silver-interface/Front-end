@@ -104,7 +104,7 @@ function NavbarHome() {
         <div>
           <Image src={require('@/public/image/Search.png')}
             width={26}
-            height={26} />
+            height={27} />
         </div>
         <input type='text' className={styles.caja}
           onChange={(e) => {
