@@ -61,7 +61,7 @@ const Login = ({ onLogin }) => {  //prop onLogin para notificar a _app.js cuando
           localStorage.setItem('token', token);
           console.log("token recibido:", token);
           router.push('/');
-          console.log("Success")
+          console.log("Success");
         } else {
           console.error("El servidor no proporcionó un token en la respuesta.");
         }
