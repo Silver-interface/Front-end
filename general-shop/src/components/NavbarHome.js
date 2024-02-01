@@ -135,7 +135,7 @@ function NavbarHome({ isAutenticated, onLogin, onLogout }) { //prop isAuthentica
             width={21}
             height={40}
           />
-          <a href='/productos' className={styles.refCatalogo}>
+          <a href='/catalogo' className={styles.refCatalogo}>
             <p>CATALOGO</p>
           </a>
         </div>
