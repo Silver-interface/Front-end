@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 
 function NavbarHome({ isAutenticated, onLogin, onLogout }) { //prop isAuthenticated para mostrar iconos en la barra de navegación.
+ console.log(isAutenticated);
 
   //funcionalidad barra buscadora
   const [product, setProduct] = useState([]);  // variable de estado del input
@@ -44,7 +45,7 @@ function NavbarHome({ isAutenticated, onLogin, onLogout }) { //prop isAuthentica
 
   //controlador de clic al icono usuario para mostrar ventana emergente
   const InfoUsuario = async () => {
-
+   
     if (isAutenticated) {
       // Usuario autenticado: Mostrar nombre y opción de cerrar sesión
       try {
