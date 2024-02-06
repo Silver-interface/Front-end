@@ -6,6 +6,8 @@ import TitleProducto from '@/src/components/TituloProducto';
 import styles from '@/src/styles/catalogo.module.css';
 import Image from 'next/image';
 import { obtenerCirculosDeColores } from '@/src/components/Producto';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../libs/cartSlice';
 
 function catalogoPage() {
 
@@ -90,6 +92,8 @@ function catalogoPage() {
     loadProducts();
   }, []);
 
+  const dispatch = useDispatch();
+
   return (
     <div>
       <NavbarHome />
@@ -145,7 +149,7 @@ function catalogoPage() {
                     </div>
 
                   </div>
-                  <button className={styles.carrito}><b>Agregar producto</b>
+                  <button className={styles.carrito} onClick={() => dispatch(addToCart(selectProduct))}><b>Agregar producto</b>
                     <Image src={require('@/public/image/Shopping Cart.png')}
                       width={20}
                       height={20}

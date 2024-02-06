@@ -142,12 +142,12 @@ function NavbarHome({ isAutenticated, onLogin, onLogout }) { //prop isAuthentica
         </div>
 
         {/* icono carro */}
-        <div className={styles.carrito}>
+        <a href='/carrito' className={styles.carrito}>
           <Image src={require('@/public/image/Shopping Cart.png')}
             width={25}
             height={20}
           />
-        </div>
+        </a>
       </div>
 
       {/* barra de busqueda */}

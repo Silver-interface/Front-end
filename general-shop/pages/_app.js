@@ -1,4 +1,6 @@
 import React, { useState } from 'react';   //manejo de estado en la función del componente
+import { Provider } from 'react-redux';
+import store from '../libs/store';
 
 
 export default function App({ Component, pageProps }) {  //Component como página actual que se renderiza y pageProps como propiedades de esa página
@@ -14,7 +16,11 @@ export default function App({ Component, pageProps }) {  //Component como págin
     setIsAuthenticated(false);
   };
 
-  return <Component {...pageProps} isAutenticated={isAutenticated} onLogin={UserLogin} onLogout={UserLogout} />;
-      
-    
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} isAutenticated={isAutenticated} onLogin={UserLogin} onLogout={UserLogout} />
+    </Provider>
+  )
+
+
 }
