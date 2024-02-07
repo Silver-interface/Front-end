@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
 
 
@@ -136,18 +137,18 @@ function NavbarHome({ isAutenticated, onLogin, onLogout }) { //prop isAuthentica
             width={21}
             height={40}
           />
-          <a href='/catalogo' className={styles.refCatalogo}>
+          <Link href='/catalogo' className={styles.refCatalogo}>
             <p>CATALOGO</p>
-          </a>
+          </Link>
         </div>
 
         {/* icono carro */}
-        <a href='/carrito' className={styles.carrito}>
+        <Link href='/carrito' className={styles.carrito}>
           <Image src={require('@/public/image/Shopping Cart.png')}
             width={25}
             height={20}
           />
-        </a>
+        </Link>
       </div>
 
       {/* barra de busqueda */}
