@@ -21,8 +21,6 @@ function Categorias() {
                     />
                     <div>MUJER</div>
                 </div>
-
-
                 <div className={styles.seccionHombre}>
                     <Image src={require('@/public/image/hombre.png')}
                         width={279}
@@ -30,14 +28,6 @@ function Categorias() {
                     />
                     <div>HOMBRE</div>
                 </div>
-
-                {/* <div className={styles.seccionEco}>
-                    <Image src={require('@/public/image/ecofriendly.png')}
-                        width={279}
-                        height={279}
-                    />
-                    <div>ECOFRIENDLY</div>
-                </div> */}
             </div>
 
         </div>
