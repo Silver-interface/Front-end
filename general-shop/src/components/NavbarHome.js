@@ -13,8 +13,6 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
   const [product, setProduct] = useState([]);  // variable de estado del input
   const [productMatch, setProductMatch] = useState([]); //estado para coincidencia
   const [selectProduct, setSelectProduct] = useState(null);
-  const [showModal, setShowModal] = useState(false);  //mostrar ventana de informacion usuario
-  const [userName, setUserName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);  //para el carousel de la ventana emergente
 
 
@@ -52,8 +50,25 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
       });
       setProductMatch(matches);
     }
-  }
+    if (text && productMatch.length === 0) {
+      setProductMatch([{ notFound: true }]);
+    }
+  };
+  
 
+  const totalPages = Math.ceil(productMatch.length / 2);
+
+  // Función para manejar el clic en el botón de página anterior
+  const clickPrev = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  // Función para manejar el clic en el botón de página siguiente
+  const clickNext = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+ 
 
   return (
     <div className={styles.contenedorPrincipal}>
@@ -134,7 +149,7 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
                 </div>
               ) : (
                 <div key={product._id} className={styles.cardContent} onClick={() => redirectionProduct(product._id)}>
-                   
+
                   <div className={styles.card}>
                     <div key={product._id} className={styles.cardImage}>
                       <Image

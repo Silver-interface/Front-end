@@ -170,7 +170,7 @@ function catalogoPage() {
                       <option value="XL">XL</option>
                     </select>
                     <div className={styles.cantidad}>
-                      <button onClick={decrementarCantidad} disabled={cantidad === 0} >
+                      <button onClick={decrementarCantidad} disabled={cantidad === 1} >
                         <strong>-</strong>
                       </button>
                       <strong>{cantidad}</strong>

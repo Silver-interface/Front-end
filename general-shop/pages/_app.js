@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {  //Component como págin
 
   return (
     <Provider store={store}>
-      <Component {...pageProps} isAutenticated={isAutenticated} onLogin={UserLogin} onLogout={UserLogout} />
+      <Component {...pageProps} isAutenticated={isAuthenticated} onLogin={UserLogin} onLogout={UserLogout} />
     </Provider>
   )
 
