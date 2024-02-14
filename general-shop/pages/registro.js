@@ -50,7 +50,7 @@ const Registro = () => {
     } else if (!/(?=.*[a-z])(?=.*[A-Z])/.test(inputPassword)) {  // Check intercambio de letras  lookaheads
       Toast.fire({
         icon: "warning",
-        title: "Incluya letras mayusculas y minusculas"
+        title: "Incluya letras mayusculas y minusculas en la contraseña"
       });
       return;
 
@@ -69,10 +69,10 @@ const Registro = () => {
       });
       return;
     }
-console.log('Conectando con Base de Datos...')
+    console.log('Conectando con Base de Datos...')
     try {
       const res = await fetch("http://localhost:3002/auth/register/", {
-        
+
         method: 'POST',
         body: JSON.stringify({ email, password, name, lastName, IdNumber, IdType }),
         headers: {  //valor que espera el backend para que entienda que es un objeto json
@@ -147,7 +147,7 @@ console.log('Conectando con Base de Datos...')
                 <label for="validationServerUsername" className="form-label">Datos personales</label>
 
                 <input type="email" className="form-control" placeholder="Correo electrónico" aria-label="Correo Electronico"
-                  onChange={(e) => setEmail(e.target.value)} value={email} pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" 
+                  onChange={(e) => setEmail(e.target.value)} value={email} pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                   required />
 
               </div>
@@ -205,7 +205,7 @@ console.log('Conectando con Base de Datos...')
                   width={30}
                   height={30}
                 ></Image></a>Regresar
-                </div>
+              </div>
             </form>
           </div>
         </div>
