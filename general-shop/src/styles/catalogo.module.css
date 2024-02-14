@@ -7,8 +7,60 @@
   height: 50%;
   gap: 5px;
   cursor: pointer;
+
+}
+.filtroContainer {
+  margin-top: 1%;
+  width: 25%;
+  height: 100%;
+  border: 1px solid #CCBABA; 
+  border-radius: 10px;
+  padding: 2%;
+  position: sticky;
+  top: 50px;
+ 
+}
+
+.filtroTalla  div {
+    display: flex;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 2px solid #F6A444; 
+    display: inline-block;
+    cursor: pointer;
+    padding: 1%;
+}
+
+.filtroSeccion input[type="radio"] {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  border: 2px solid #F6A444; 
+  background-color: #fff; 
+  margin-right: 3%;
   
 }
+
+.filtroSeccion input[type="radio"]:checked {
+  background-color: #F6A444; 
+  border-color: #000; 
+}
+
+.filtroTalla, .filtroSeccion, .filtroColor {
+  margin: 4%;
+}
+
+.filtroTalla div:active {
+    background-color: #F6A444;
+}
+
+
+
+
+
 
 .modalContainer {
   position: fixed;

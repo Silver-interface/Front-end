@@ -9,6 +9,7 @@ import { obtenerCirculosDeColores } from '@/src/components/Producto';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../libs/cartSlice';
 
+
 function catalogoPage() {
 
   const [products, setProducts] = useState([]);
@@ -74,11 +75,9 @@ function catalogoPage() {
     return 0; //Valor predeterminado si no se encuentra la talla
   };
 
-
-
+ 
 
   useEffect(() => {
-    console.log('selectProduct:', selectProduct);
     const loadProducts = async () => {
       try {
         const response = await fetch("http://localhost:3002/item/items/");
@@ -98,7 +97,39 @@ function catalogoPage() {
     <div>
       <NavbarHome />
       <TitleProducto />
+
+      {/* Filtro     */}
+
+
       <div className={styles.Card}>
+
+        <div className={styles.filtroContainer}>
+          <h2>Filtrar productos</h2>
+          <hr/>
+
+          <div className={styles.filtroTalla}>
+            <h3>Talla</h3>
+            <div>XS</div>
+            <div>S</div>
+            <div>M</div>
+            <div>L</div>
+            <div>XL</div>
+          </div>
+
+          <div className={styles.filtroSeccion}>
+          <h3>Sección</h3>
+           <ul>
+            <p><input type="radio"/>Hombre</p>
+            <p><input type="radio"/>Mujer</p>
+           </ul>
+
+          </div>
+          <div className={styles.filtroColor}>
+          <h3>Color</h3>
+          {obtenerCirculosDeColores(['Negro', 'Blanco', 'Azul', 'Gris', 'Rojo'])}
+          </div>
+        </div>
+
         {products.map((product) => (
           <div key={product._id} onClick={() => onClickProduct(product)}>
             <Producto
@@ -113,11 +144,11 @@ function catalogoPage() {
       </div>
       {/* Detalle del producto */}
       {VentanaOpen && (
-        <div className={styles.modalContainer} onClick={VentanaClose}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <div key={selectProduct._id} className={styles.modalContainer} onClick={VentanaClose}>
+          <div  className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
 
             {selectProduct && (
-              <div className={styles.productDetails}>
+              <div className={styles.productDetails} >
                 <div className={styles.imgProduct}>
                   <Image
                     src={selectProduct.image}

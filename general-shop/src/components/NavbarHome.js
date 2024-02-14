@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
+import { obtenerCirculosDeColores } from './Producto';
 import { useState } from 'react';
 import Link from 'next/link';
 import Usuario from './Usuario';
@@ -9,14 +10,24 @@ import Usuario from './Usuario';
 function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para mostrar iconos en la barra de navegación.
   console.log("NavbarHome - isAuthenticated:", isAuthenticated);
 
-  //funcionalidad barra buscadora
   const [product, setProduct] = useState([]);  // variable de estado del input
   const [productMatch, setProductMatch] = useState([]); //estado para coincidencia
+  const [selectProduct, setSelectProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);  //mostrar ventana de informacion usuario
+  const [userName, setUserName] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);  //para el carousel de la ventana emergente
+
+
+  //funcion redireccionamiento a pag. catalogo con el detalle del producto
+  const redirectionProduct = (productId) => {
+    setSelectProduct(null);
+    window.location.href = (`/catalogo?productId=${productId}`);
+  };
 
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const response = await fetch(`https://fakestoreapi.com/products`);
+        const response = await fetch('http://localhost:3002/item/items');
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -27,13 +38,17 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
   }, [])
 
   //funcion busqueda
+  //método includes() para verificar si cada palabra de búsqueda está presente en el producto.
   const searchProduct = (text) => {
     if (!text) {
       setProductMatch([]);
     } else {
+      const searchTerms = text.toLowerCase().split(" ");
       let matches = product.filter((product) => {
-        const regex = new RegExp(`${text}`, "gi");
-        return product.title.match(regex)
+        // Combinar propiedades relevantes para la búsqueda (descripcion, marca, color, nombre, seccion)
+        const properties = `${product.name} ${product.description} ${product.brand} ${product.section} ${product.color}`;
+        const combinedProperties = properties.toLowerCase();
+        return searchTerms.every((term) => combinedProperties.includes(term));
       });
       setProductMatch(matches);
     }
@@ -105,23 +120,63 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
           onChange={(e) => {
             searchProduct(e.target.value);
           }}></input>
+        {productMatch.length > 0 && (
+          <div className={`${styles.resultBusqueda} ${styles.active}`}>
+            {productMatch.slice((currentPage - 1) * 2, currentPage * 2).map((product, id) => (
+              product.notFound ? (
+                <div className={styles.notFound}>
+                  <Image
+                    src={require('@/public/image/Clothes.png')}
+                    width={50}
+                    height={50}
+                  />
+                  No se encuentró el producto
+                </div>
+              ) : (
+                <div key={product._id} className={styles.cardContent} onClick={() => redirectionProduct(product._id)}>
+                   
+                  <div className={styles.card}>
+                    <div key={product._id} className={styles.cardImage}>
+                      <Image
+                        src={product.image}
+                        width={150}
+                        height={150}
+                      />
+                    </div>
+                    <div className={styles.cardBody}>
+                      <div>
+                        <p>{product.name}</p>
+                        {obtenerCirculosDeColores(product.color)}
+                        <strong> <p>$ {product.price}</p></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            ))}
+            <p className={styles.verTodos} onClick={() => window.location.href = '/catalogo'}>Ver todos los productos</p>
 
-        <div className={`${styles.resultBusqueda} ${productMatch.length > 0 && styles.active}`}>
-          {productMatch.map((product, id) => (
-            <div key={id} className={styles.card}>
-              <Image
-                src={product.image}
-                alt={product.title}
-                width={100}
-                height={100}
-              />
-              <p>{product.title}</p>
-            </div>
-          ))}
-          {productMatch.length > 0 && (
-            <a href='/productos'> <p className={styles.verTodos}>Ver todos los productos </p> </a>
-          )}
-        </div>
+            {/* Renderizar el carrusel si hay más de una página */}
+            {totalPages > 1 && (
+              <div className={styles.carousel}>
+                <Image
+                  src={require('@/public/image/Back.png')}
+                  width={30}
+                  height={30}
+                  onClick={clickPrev}
+                  className={currentPage === 1 ? styles.disabledArrow : ''}
+                />
+                <Image
+                  src={require('@/public/image/Next.png')}
+                  width={30}
+                  height={30}
+                  onClick={clickNext}
+                  className={currentPage === totalPages ? styles.disabledArrow : ''}
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* icono usuario */}
