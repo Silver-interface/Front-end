@@ -3,7 +3,7 @@ import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
-
+import Usuario from './Usuario';
 
 
 function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para mostrar iconos en la barra de navegación.
