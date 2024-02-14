@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import styles from '../src/styles/login.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import Swal from 'sweetalert2'
-
-
+import Swal from 'sweetalert2';
 
 const Login = ({ onLogin }) => {  //prop onLogin para notificar a _app.js cuando el usuario ha iniciado sesión 
 
@@ -30,47 +28,39 @@ const Login = ({ onLogin }) => {  //prop onLogin para notificar a _app.js cuando
           password: password,
         }),
       });
-
       const data = await res.json();
       console.log("Respuesta del servidor", data);
+      const token = data.token;
 
-
-
-      if (data === "NOT_FOUND_USER") {
-        Swal.fire({
-          title: "Usuario no encontrado",
-          text: "No tienes una cuenta, registrese",
-          icon: "warning"
-        });
-        router.push('/registro');
-
-      } else if (data === "PASSWORD_INCORRECT") {
-        Swal.fire({
-          title: "Contraseña incorrecta",
-          text: "Intentelo de nuevo",
-          icon: "warning"
-        });
-        console.log(data)
-      }
-      else {
-        const token = data.token;
-
-
-        if (data.token) {
-          // Token obtenido con éxito, almacenarlo en localStorage
-          localStorage.setItem('token', token);
-          console.log("token recibido:", token);
-          router.push('/');
-          console.log("Success");
-        } else {
-          console.error("El servidor no proporcionó un token en la respuesta.");
-        }
+      if (data.token) {
+        // Token obtenido con éxito, almacenarlo en localStorage
+        localStorage.setItem('token', token);
+        console.log("token recibido:", token);
+        onLogin();
+        router.push('/');
+        console.log("Success");
+      } else {
+        console.error("El servidor no proporcionó un token en la respuesta.");
       }
 
     } catch (error) {
       console.error(error);
-    };
+      if (error) {
+        Swal.fire({
+          title: "Usuario no encontrado",
+          text: "Error en los datos ingresados, verifique nuevamente",
+          icon: "warning"
+        });
+      }
 
+      if (error === 500) {
+        Swal.fire({
+          title: "Usuario no encontrado",
+          text: "Error en el servidor, Intente nuevamente",
+          icon: "warning"
+        });
+      }
+    };
   }
 
   return (
