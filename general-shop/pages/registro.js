@@ -184,9 +184,6 @@ const Registro = () => {
               <div className="col-12 mb-3">
                 <input type="password" id="inputPassword6" class="form-control" placeholder="Confirmación de contraseña" aria-label="Confirmación de Contraseña" aria-describedby="passwordHelpBlock"
                   required />
-                <div id="passwordHelpBlock" class="form-text">
-                  Debe ser igual a la contraseña.
-                </div>
               </div>
               <div className="col-md-12 mb-3">
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#f6a444' }}>Registrarse</button>
