@@ -15,13 +15,11 @@ import { AuthProvider } from '@/contexts/authContext';
 
 
 const Home = () => {
-  useEffect(() => {
-    const root = document.getElementById('root');
-    ReactDOM.render(
-      <React.StrictMode>
+  
+  return (
+     
         <AuthProvider>
-
-          <NavbarHome />
+          <NavbarHome/>
           <Separador />
           <Portada />
           <Popular />
@@ -64,12 +62,9 @@ const Home = () => {
           <Footer />
 
         </AuthProvider>
-      </React.StrictMode>,
-      root
+    
+      
     );
-  }, []);
-
-  return null;
 };
 
 export default Home;

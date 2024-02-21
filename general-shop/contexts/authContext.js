@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
 
 const AuthContext = createContext();
 
@@ -6,28 +7,33 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const login = () => {
-    // Lógica de autenticación  (verificar el token en localStorage)
+  useEffect(() => {
+    // Verificar el token al cargar la aplicación
     const token = localStorage.getItem('token');
-    console.log(token);
-    if (token){
+    if (token) {
       setIsAuthenticated(true);
-    } else {
-      console.error('No se encontró ningún token en localStorage');
     }
+  }, []);
+
+  const login = (userData, token) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+    console.log(userData);
+    console.log(user);
+    localStorage.setItem('token', token);
   };
 
   const logout = () => {
-    // Lógica para cerrar sesión (limpiar el token en localStorage)
     setIsAuthenticated(false);
-    localStorage.removeItem('token'); 
+    setUser(null);
+    localStorage.removeItem('token');
   };
-  console.log(isAuthenticated);
+console.log(isAuthenticated);
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, user, logout }}>
     {children}
-    
     </AuthContext.Provider>
   );
 };

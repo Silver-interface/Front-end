@@ -5,7 +5,6 @@ import Producto from '@/src/components/Producto';
 import TitleProducto from '@/src/components/TituloProducto';
 import styles from '@/src/styles/catalogo.module.css';
 import { fetchAllProducts } from '@/utils/api-products';
-import ProductoDetalle from './[_id]/detalleProducto';
 import Link from 'next/link';
 import Filtro from '@/src/components/Filtro';
 import { useRouter } from 'next/router';
@@ -47,16 +46,6 @@ function catalogoPage() {
 
         ))}
       </div>
-      {/* Detalle del producto */}
-      {/* <ProductoDetalle
-        selectProduct={selectProduct}
-        setSelectProduct={setSelectProduct}
-        tallaSeleccionada={tallaSeleccionada}
-        setTallaSeleccionada={setTallaSeleccionada}
-        cantidad={cantidad}
-        setCantidad={setCantidad}
-      /> */}
-
       <Footer />
     </div>
   );

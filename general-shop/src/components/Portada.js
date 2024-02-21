@@ -10,7 +10,7 @@ function Portada() {
         height={774}
       />
       <div className={styles.descripcion}>
-        <p>GENERAL SHOP TE PONE A LA <div className={styles.moda}>MODA</div></p>
+        <p>GENERAL SHOP TE PONE A LA <span className={styles.moda}>MODA</span></p>
       </div>
     </div>
 

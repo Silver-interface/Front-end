@@ -8,8 +8,8 @@ import Usuario from './Usuario';
 import { useAuth } from '@/contexts/authContext';
 
 
-function NavbarHome() { 
-  const {isAuthenticated, logout} = useAuth();
+const NavbarHome = () => { 
+  const {isAuthenticated, login, logout} = useAuth();
   console.log("NavbarHome - isAuthenticated:", isAuthenticated);
 
   const [product, setProduct] = useState([]);  // variable de estado del input
@@ -253,6 +253,6 @@ function NavbarHome() {
       </div>
     </div>
   );
-}
+};
 
 export default NavbarHome;

@@ -63,7 +63,11 @@
 
 .logout {
     display: flex;
-    align-items: center;
+    width: 20%;
+    gap:15px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
 }
 
 .home img {
@@ -134,7 +138,6 @@
 }
 
 .refCatalogo, 
-.refSecciones,
 .ref,
 .refB {
     text-decoration: none;
@@ -142,10 +145,10 @@
 }
 
 .refCatalogo:hover, 
-.refSecciones:hover,
+.seccion:hover,
 .ref:hover {
     color: #f6a444;
-}
+} 
 
 
 .refB {

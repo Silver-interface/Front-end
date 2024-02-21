@@ -32,13 +32,13 @@ const Login = () => {  //prop onLogin para notificar a _app.js cuando el usuario
       });
       const data = await res.json();
       console.log("Respuesta del servidor", data);
-      const token = data.token;
+      
+    
+     
 
       if (data.token) {
         // Token obtenido con éxito, almacenarlo en localStorage
-        localStorage.setItem('token', token);
-        console.log("token recibido:", token);
-        login();
+        login(data.user, data.token);
         router.push('/');
         console.log("Success");
       } else {

@@ -3,7 +3,7 @@ import React from 'react';
 
 
 
-class MyDocument extends Document {
+class MyDocument extends Document {                 
   render() {
     return (
       <Html lang="en" >

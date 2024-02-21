@@ -5,33 +5,29 @@ import styles from '../styles/NavbarHome.module.css';
 
 
 function Usuario() {
-  const {isAuthenticated, logout} = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
 
   console.log(isAuthenticated);
+  console.log(user);
   return (
-    
+
     <div >
-      
-        {isAuthenticated ? (
-          <>
+
+      {isAuthenticated ? (
+        <>
+          <div className={styles.logout}>
+            <span>Hola  </span>
             <Image src={require('@/public/image/User.png')} width={45} height={45} />
-            <span>hola usuario</span>
-          </>
-        ) : (
-          <a href='/login'>
-          <Image src={require('@/public/image/User.png')}   width={45} height={45} />
-          </a>
-        )}
-     
-      {isAuthenticated && (
-        <div className={styles.logout} onClick={logout}>
-          <Image src={require('@/public/image/logout.png')} width={45} height={45} />
-        </div>
+            <Image src={require('@/public/image/logout.png')} width={45} height={45}  onClick={logout} />
+          </div>
+        </>
+      ) : (
+        <a href='/login'>
+          <Image src={require('@/public/image/User.png')} width={45} height={45} />
+        </a>
       )}
-      
     </div>
   );
-  }
-  
-  export default Usuario;
-    
+}
+
+export default Usuario;
