@@ -5,21 +5,34 @@ import { obtenerCirculosDeColores } from './Producto';
 import { useState } from 'react';
 import Link from 'next/link';
 import Usuario from './Usuario';
+import { useAuth } from '@/contexts/authContext';
 
 
-function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para mostrar iconos en la barra de navegación.
+function NavbarHome() { 
+  const {isAuthenticated, logout} = useAuth();
   console.log("NavbarHome - isAuthenticated:", isAuthenticated);
 
   const [product, setProduct] = useState([]);  // variable de estado del input
   const [productMatch, setProductMatch] = useState([]); //estado para coincidencia
   const [selectProduct, setSelectProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);  //para el carousel de la ventana emergente
+  const [modalSecciones, setModalSecciones] = useState(false);
 
+ 
+
+  //funcion modal para secciones
+  const openModal = () => {
+    setModalSecciones(true);
+  };
+
+  const closeModal = () => {
+    setModalSecciones(false);
+  };
 
   //funcion redireccionamiento a pag. catalogo con el detalle del producto
   const redirectionProduct = (productId) => {
     setSelectProduct(null);
-    window.location.href = (`/catalogo?productId=${productId}`);
+    window.location.href = (`/catalogo/${productId}/detalleProducto`);
   };
 
   useEffect(() => {
@@ -37,15 +50,21 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
 
   //funcion busqueda
   //método includes() para verificar si cada palabra de búsqueda está presente en el producto.
+  const removeTilde = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+
   const searchProduct = (text) => {
     if (!text) {
       setProductMatch([]);
     } else {
-      const searchTerms = text.toLowerCase().split(" ");
+      const normalizedText = removeTilde(text.toLowerCase());
+      const searchTerms = normalizedText.split(" ");
       let matches = product.filter((product) => {
         // Combinar propiedades relevantes para la búsqueda (descripcion, marca, color, nombre, seccion)
         const properties = `${product.name} ${product.description} ${product.brand} ${product.section} ${product.color}`;
-        const combinedProperties = properties.toLowerCase();
+        const combinedProperties = removeTilde(properties).toLowerCase();
         return searchTerms.every((term) => combinedProperties.includes(term));
       });
       setProductMatch(matches);
@@ -54,7 +73,7 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
       setProductMatch([{ notFound: true }]);
     }
   };
-  
+
 
   const totalPages = Math.ceil(productMatch.length / 2);
 
@@ -68,7 +87,7 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
- 
+
 
   return (
     <div className={styles.contenedorPrincipal}>
@@ -96,7 +115,7 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
         </div>
 
         {/* icono secciones */}
-        <div className={styles.seccion}>
+        <div className={styles.seccion} onClick={openModal}>
           <Image src={require('@/public/image/section.png')}
             width={23}
             height={24}
@@ -104,13 +123,41 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
           <p>SECCIONES</p>
         </div>
 
+        {modalSecciones && (
+          <div className={styles.modalSeccion}>
+            <div className={styles.contentModalSeccion}>
+              <div className={styles.seccionMujer}>
+                <Image src={require('@/public/image/mujer.png')}
+                  width={170}
+                  height={170}
+                />
+                <div>MUJER</div>
+              </div>
+              <div className={styles.seccionHombre}>
+                <Image src={require('@/public/image/hombre.png')}
+                  width={170}
+                  height={170}
+                />
+                <div>HOMBRE</div>
+              </div>
+              <Image
+                src={require('@/public/image/Close.png')}
+                width={18}
+                height={18}
+                onClick={closeModal}
+              />
+            </div>
+
+          </div>
+        )}
+
         {/* icono catalogo */}
         <div className={styles.catalogo}>
           <Image src={require('@/public/image/Bookmark.png')}
             width={21}
             height={40}
           />
-          <Link href='/catalogo' className={styles.refCatalogo}>
+          <Link href='/catalogo/catalogo' className={styles.refCatalogo}>
             <p>CATALOGO</p>
           </Link>
         </div>
@@ -196,7 +243,7 @@ function NavbarHome({ isAuthenticated, onLogout }) { //prop isAuthenticated para
 
       {/* icono usuario */}
       <div className={styles.usuario}>
-        <Usuario isAuthenticated={isAuthenticated} onLogout={onLogout} />
+      <Usuario isAuthenticated={isAuthenticated} logout={logout} />
         {!isAuthenticated && (
           // Mostrar botón de registro solo si el usuario no está autenticado
           <button className={styles.botonRegistro}>

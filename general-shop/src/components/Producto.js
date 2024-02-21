@@ -12,6 +12,7 @@ const colorMap = {
 }
 
 export const obtenerCirculosDeColores = (colores) => {
+  if (!colores) return null; 
   return colores.map((colorKeyword, index) => (
     <div
       key={index}

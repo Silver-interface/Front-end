@@ -3,12 +3,14 @@ import styles from '../src/styles/login.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2';
+import { useAuth } from '@/contexts/authContext';
 
-const Login = ({ onLogin }) => {  //prop onLogin para notificar a _app.js cuando el usuario ha iniciado sesión 
+const Login = () => {  //prop onLogin para notificar a _app.js cuando el usuario ha iniciado sesión 
 
+ 
   //Declaracion de Hooks
   const router = useRouter();
-
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,7 +38,7 @@ const Login = ({ onLogin }) => {  //prop onLogin para notificar a _app.js cuando
         // Token obtenido con éxito, almacenarlo en localStorage
         localStorage.setItem('token', token);
         console.log("token recibido:", token);
-        onLogin();
+        login();
         router.push('/');
         console.log("Success");
       } else {

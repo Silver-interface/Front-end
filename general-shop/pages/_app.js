@@ -1,27 +1,22 @@
-import React, { useState } from 'react';   //manejo de estado en la función del componente
+import React, { useState } from 'react';
+import { AuthProvider, useAuth } from '@/contexts/authContext';
 import { Provider } from 'react-redux';
 import store from '../libs/store';
+import Usuario from '@/src/components/Usuario';
+import NavbarHome from '@/src/components/NavbarHome';
 
 
-export default function App({ Component, pageProps }) {  //Component como página actual que se renderiza y pageProps como propiedades de esa página
 
-  //manejo de estados de autenticación
-  const [isAuthenticated, setIsAuthenticated] = useState(false);   // se inicializa en false (no autenticado)
-  
-  const UserLogin = () => {   //se rastrea que el usuario se ha autenticado
-    setIsAuthenticated(true);
-  };
+export default function App({ Component, pageProps }) {
 
-  const UserLogout = () => {  //usuario no autenticado
-    setIsAuthenticated(false);
-    localStorage.clear();
-  };
 
   return (
-    <Provider store={store}>
-      <Component {...pageProps} isAutenticated={isAuthenticated} onLogin={UserLogin} onLogout={UserLogout} />
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+
+        <Component {...pageProps} />
+      </Provider>
+    </AuthProvider>
   )
-
-
 }
+

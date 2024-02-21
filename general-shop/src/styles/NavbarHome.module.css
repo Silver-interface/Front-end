@@ -109,12 +109,14 @@
     width: 24%;
     align-items: center;
     padding-top: 1%;
+    cursor: pointer;
 }
 
 .seccion img {
     width: 100%;
     height: 100%;
     margin-bottom: 10%;
+   
 }
 
 .oferta {
@@ -224,4 +226,34 @@
   .disabledArrow {
     opacity: 0.5; 
     pointer-events: none; 
+  }
+
+  .modalSeccion {
+    position: absolute;
+    background-color: transparent; 
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6); 
+    border-radius: 10px;
+    z-index: 1; 
+    top: 8%;
+    left: 20%; 
+    width: 27%;
+    padding: 0.5%;
+  }
+
+  .contentModalSeccion {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .seccionMujer, 
+  .seccionHombre {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+  .seccionMujer div, 
+  .seccionHombre div {
+    display: flex;
+    position: absolute;
   }
