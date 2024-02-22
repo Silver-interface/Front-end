@@ -5,9 +5,9 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2';
 import { useAuth } from '@/contexts/authContext';
 
-const Login = () => {  //prop onLogin para notificar a _app.js cuando el usuario ha iniciado sesión 
+const Login = () => { 
 
- 
+
   //Declaracion de Hooks
   const router = useRouter();
   const { login } = useAuth();
@@ -32,13 +32,12 @@ const Login = () => {  //prop onLogin para notificar a _app.js cuando el usuario
       });
       const data = await res.json();
       console.log("Respuesta del servidor", data);
-      
-    
-     
 
-      if (data.token) {
-        // Token obtenido con éxito, almacenarlo en localStorage
-        login(data.user, data.token);
+      const { token, user } = data;
+
+      if (token) {
+        console.log(user);
+        login(user, token);
         router.push('/');
         console.log("Success");
       } else {

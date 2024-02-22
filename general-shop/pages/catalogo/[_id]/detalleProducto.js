@@ -11,10 +11,9 @@ function ProductoDetalle() {
   const router = useRouter();
   const [selectProduct, setSelectProduct] = useState(null);
   const [tallaSeleccionada, setTallaSeleccionada] = useState('default');
-  const [cantidad, setCantidad] = useState(0);
+  const [cantidad, setCantidad] = useState(1);
   const [product, setProduct] = useState(null);
   const { _id } = router.query; //Obtener el ID del producto de la URL
- console.log(_id);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,8 +49,10 @@ function ProductoDetalle() {
   };
 
   const decrementarCantidad = () => {
-    if (cantidad > 0) {
+    if (cantidad > 1) {
       setCantidad(cantidad - 1);
+    }else {
+      setCantidad(1);
     }
   };
 

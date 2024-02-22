@@ -17,12 +17,15 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (userData, token) => {
-    setIsAuthenticated(true);
-    setUser(userData);
-    console.log(userData);
-    console.log(user);
-    localStorage.setItem('token', token);
+
+  const login =  (userData, token) => {
+    
+      setIsAuthenticated(true);
+      localStorage.setItem('token', token);
+      setUser(userData); 
+      console.log(userData);
+      console.log(user);
+      console.log(setUser);
   };
 
   const logout = () => {
@@ -30,7 +33,11 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('token');
   };
+
+  
+  
 console.log(isAuthenticated);
+
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, user, logout }}>
     {children}

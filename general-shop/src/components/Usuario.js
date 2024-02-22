@@ -9,10 +9,9 @@ function Usuario() {
 
   console.log(isAuthenticated);
   console.log(user);
+
   return (
-
     <div >
-
       {isAuthenticated ? (
         <>
           <div className={styles.logout}>
