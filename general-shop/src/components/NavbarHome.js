@@ -18,8 +18,6 @@ const NavbarHome = () => {
   const [currentPage, setCurrentPage] = useState(1);  //para el carousel de la ventana emergente
   const [modalSecciones, setModalSecciones] = useState(false);
 
- 
-
   //funcion modal para secciones
   const openModal = () => {
     setModalSecciones(true);
@@ -147,7 +145,6 @@ const NavbarHome = () => {
                 onClick={closeModal}
               />
             </div>
-
           </div>
         )}
 

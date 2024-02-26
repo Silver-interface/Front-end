@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/authContext';
 import styles from '../styles/NavbarHome.module.css';

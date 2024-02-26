@@ -7,13 +7,10 @@ import styles from '@/src/styles/catalogo.module.css';
 import { fetchAllProducts } from '@/utils/api-products';
 import Link from 'next/link';
 import Filtro from '@/src/components/Filtro';
-import { useRouter } from 'next/router';
 
 function catalogoPage() {
 
   const [products, setProducts] = useState([]);
-  const router = useRouter();
-
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -23,24 +20,22 @@ function catalogoPage() {
     loadProducts();
   }, []);
 
-
   return (
     <div>
       <NavbarHome />
       <TitleProducto />
-      
       <div className={styles.Card}>
-      <Filtro/>
+        <Filtro />
         {products.map((product) => (
           <div key={product._id}>
             <Link style={{ textDecoration: 'none' }} href={`/catalogo/${product._id}/detalleProducto`}>
-                <Producto
-                  key={product._id}
-                  image={product.image}
-                  name={product.name}
-                  color={product.color}
-                  price={product.price}
-                />
+              <Producto
+                key={product._id}
+                image={product.image}
+                name={product.name}
+                color={product.color}
+                price={product.price}
+              />
             </Link>
           </div>
 

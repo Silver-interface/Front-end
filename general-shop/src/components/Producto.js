@@ -28,8 +28,6 @@ const colorFromBasedeDatos = (keyword) => {
 };
 
 function Producto({ _id, image, name, color, price }) {   //(atributos de la api)
-
-
   return (
     <div key={_id} className={styles.product}>
       <Image className={styles.imageProduct}

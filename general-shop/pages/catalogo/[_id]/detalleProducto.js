@@ -12,7 +12,7 @@ function ProductoDetalle() {
   const [selectProduct, setSelectProduct] = useState(null);
   const [tallaSeleccionada, setTallaSeleccionada] = useState('default');
   const [cantidad, setCantidad] = useState(1);
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState(null); 
   const { _id } = router.query; //Obtener el ID del producto de la URL
   const dispatch = useDispatch();
 

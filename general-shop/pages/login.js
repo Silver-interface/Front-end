@@ -7,7 +7,6 @@ import { useAuth } from '@/contexts/authContext';
 
 const Login = () => { 
 
-
   //Declaracion de Hooks
   const router = useRouter();
   const { login } = useAuth();
@@ -32,7 +31,6 @@ const Login = () => {
       });
       const data = await res.json();
       console.log("Respuesta del servidor", data);
-
       const { token, user } = data;
 
       if (token) {
@@ -56,7 +54,7 @@ const Login = () => {
 
       if (error === 500) {
         Swal.fire({
-          title: "Usuario no encontrado",
+          title: "Hubo un problema",
           text: "Error en el servidor, Intente nuevamente",
           icon: "warning"
         });
@@ -66,11 +64,9 @@ const Login = () => {
 
   return (
     <section>
-
       <div className={`container ${styles.main}`}>
         <div className={`row ${styles.cardlog}`}>
           <div className={`col p-0 position-relative`}>
-
             <Image src="/image/containerlog.jpg" fill className={styles.image} object-fit="contain" />
           </div>
           <div className="col">
@@ -84,7 +80,6 @@ const Login = () => {
             ></Image>
 
             <form className={styles.form}
-
               onSubmit={onSubmit}>
 
               <div className="mb-2">
@@ -103,10 +98,10 @@ const Login = () => {
 
                 <div id="passwordHelp" className="form-text">La contraseña debe ser de longitud mínima 5, y debe contener letras mayúsculas, letras minúsculas y números.</div>
               </div>
-              <div className="mb-4 form-check">
+              {/* <div className="mb-4 form-check">
                 <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                 <label className="form-check-label" for="exampleCheck1">Recuerdame.</label>
-              </div>
+              </div> */}
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#f6a444' }}>Iniciar Sesión</button>
               <div className={styles.registrate}>
                 O si no tienes una cuenta <br></br>
