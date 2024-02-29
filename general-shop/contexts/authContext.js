@@ -1,41 +1,36 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // Verificar el token al cargar la aplicación
-    const token = localStorage.getItem('token');
-    if (token) {
+    // Verificar si hay un usuario autenticado al cargar la aplicación
+    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    if (storedUserData) {
       setIsAuthenticated(true);
+      setUserData(storedUserData);
     }
   }, []);
 
-  const login =  (userData, token) => {
-    
-      setIsAuthenticated(true);
-      localStorage.setItem('token', token);
-      setUser(userData); 
-      console.log(userData);
-      console.log(user);
+  const login = (userData) => {
+    setIsAuthenticated(true);
+    setUserData(userData.user); // Almacena el objeto user recibido del servidor
+    localStorage.setItem('userData', JSON.stringify(userData.user));
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    setUser(null);
-    localStorage.removeItem('token');
+    setUserData(null);
+    localStorage.removeItem('userData');
   };
 
-console.log(isAuthenticated);
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, user, logout }}>
-    {children}
+    <AuthContext.Provider value={{ isAuthenticated, login, userData, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 };

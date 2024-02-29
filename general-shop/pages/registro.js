@@ -24,12 +24,12 @@ const Registro = () => {
   //Declaracion de Hooks
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [IdType, setIdType] = useState("");
-  const [IdNumber, setIdNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [NOMBRE_USUARIO, setNOMBRE_USUARIO] = useState("");
+  const [APELLIDO_USUARIO, setAPELLIDO_USUARIO] = useState("");
+  const [TIPO_DOCUMENTO, setTIPO_DOCUMENTO] = useState("");
+  const [DOCUMENTO, setDOCUMENTO] = useState("");
+  const [CORREO, setCORREO] = useState("");
+  const [CONTRASEÑA, setCONTRASEÑA] = useState("");
 
 
   //logica para el POST
@@ -69,12 +69,12 @@ const Registro = () => {
       });
       return;
     }
-    console.log('Conectando con Base de Datos...')
+    
     try {
-      const res = await fetch("http://localhost:3002/auth/register/", {
+      const res = await fetch("http://localhost:3000/register/", {
 
         method: 'POST',
-        body: JSON.stringify({ email, password, name, lastName, IdNumber, IdType }),
+        body: JSON.stringify({ CORREO, CONTRASEÑA, NOMBRE_USUARIO, APELLIDO_USUARIO, DOCUMENTO, TIPO_DOCUMENTO }),
         headers: {  //valor que espera el backend para que entienda que es un objeto json
           'Content-Type': 'application/json'
         },
@@ -123,7 +123,7 @@ const Registro = () => {
 
               <div className="col-md-12 ">
                 <select className="form-select my-4" aria-label="Default select example"
-                  onChange={(e) => setIdType(e.target.value)} value={IdType}
+                  onChange={(e) => setTIPO_DOCUMENTO(e.target.value)} value={TIPO_DOCUMENTO}
                 >
 
                   <option defaultValue >Tipo de Identificacion</option>
@@ -138,7 +138,7 @@ const Registro = () => {
                 <label htmlFor="documento" className="form-label">Documento de Identidad</label>
 
                 <input type="text" className="form-control" placeholder="Número de documento" aria-label="Documento"
-                  onChange={(e) => setIdNumber(e.target.value)} value={IdNumber}
+                  onChange={(e) => setDOCUMENTO(e.target.value)} value={DOCUMENTO}
                   required />
 
               </div>
@@ -147,14 +147,14 @@ const Registro = () => {
                 <label for="validationServerUsername" className="form-label">Datos personales</label>
 
                 <input type="email" className="form-control" placeholder="Correo electrónico" aria-label="Correo Electronico"
-                  onChange={(e) => setEmail(e.target.value)} value={email} pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                  onChange={(e) => setCORREO(e.target.value)} value={CORREO} pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                   required />
 
               </div>
 
               <div className="col-12 mb-3 has-validation">
                 <input type="text" className="form-control" placeholder="Nombre" aria-label="Primer Nombre"
-                  onChange={(e) => setName(e.target.value)} value={name}
+                  onChange={(e) => setNOMBRE_USUARIO(e.target.value)} value={NOMBRE_USUARIO}
                   required />
 
 
@@ -166,13 +166,13 @@ const Registro = () => {
               <div className="col-12 mb-3">
 
                 <input type="text" className="form-control" placeholder="Apellido" aria-label="Apellido"
-                  onChange={(e) => setLastName(e.target.value)} value={lastName}
+                  onChange={(e) => setAPELLIDO_USUARIO(e.target.value)} value={APELLIDO_USUARIO}
                   required />
               </div>
 
               <div className="col-12 mb-3">
                 <input type="password" id="inputPassword5" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="passwordHelpBlock"
-                  onChange={(e) => setPassword(e.target.value)} value={password}
+                  onChange={(e) => setCONTRASEÑA(e.target.value)} value={CONTRASEÑA}
                   required />
 
                 <div id="passwordHelpBlock" class="form-text">

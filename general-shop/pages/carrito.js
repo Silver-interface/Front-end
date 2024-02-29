@@ -1,11 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  incrementQuantity,
-  decrementQuantity,
-  removeFromCart,
-} from "../libs/cartSlice";
+import { incrementQuantity, decrementQuantity, removeFromCart, removeAllFromCart,} from "../libs/cartSlice";
 import NavbarHome from "@/src/components/NavbarHome";
 import styles from "@/src/styles/carrito.module.css";
 
@@ -17,6 +13,7 @@ const Carrito = () => {
   const [IdNumber, setIdNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const cart = useSelector((state) => state.cart);
 
@@ -24,23 +21,43 @@ const Carrito = () => {
 
   const getTotalPrice = () => {
     return cart.reduce(
-      (accumulator, item) => accumulator + item.quantity * item.price,
+      (accumulator, item) => accumulator + item.CANTIDAD * item.PRECIO,
       0
     );
   };
 
+  // const sendEmail = async (e) => {
+  //   e.preventDefault();
+  //    const response = await fetch("/API CARRITO", {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ email, address, name, lastName, IdNumber, IdType, phoneNumber cart })
+  //   }) 
+
+  //   );
+  // };
+
+  //prueba
+
   const sendEmail = async (e) => {
     e.preventDefault();
-    /* const response = await fetch("/api/send", {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({ email, address, name, lastName, IdNumber, IdType, cart })
-    }) */
-    console.log(
-      JSON.stringify({ email, address, name, lastName, IdNumber, IdType, cart })
-    );
+
+    // Mostrar una alerta de compra exitosa
+    alert('¡Compra exitosa!');
+
+    // Limpiar el carrito
+    dispatch(removeAllFromCart()); // Suponiendo que tengas una acción llamada removeAllFromCart que elimina todos los elementos del carrito
+
+    // Limpiar los campos del formulario o restablecerlos a su valor inicial si es necesario
+    setName('');
+    setLastName('');
+    setIdType('');
+    setIdNumber('');
+    setEmail('');
+    setAddress('');
+    setPhoneNumber('');
   };
 
   return (
@@ -54,6 +71,7 @@ const Carrito = () => {
             <div className={styles.header}>
               <div>Imagen</div>
               <div>Producto</div>
+              <div>Talla</div>
               <div>Precio</div>
               <div>Cantidad</div>
               <div>Acciones</div>
@@ -63,30 +81,31 @@ const Carrito = () => {
               <div className={styles.body}>
                 <div className={styles.image}>
                   <Image
-                    src={item.image}
+                    src={item.IMAGEN}
                     width={82}
                     height={93}
-                    alt={item.name}
+                    alt={item.NOMBRE_PRODUCTO}
                   />
                 </div>
-                <p>{item.name}</p>
-                <p>$ {item.price}</p>
-                <p>{item.quantity}</p>
+                <p>{item.NOMBRE_PRODUCTO}</p>
+                <p>{item.TALLA}</p>
+                <p>$ {item.PRECIO.toLocaleString()}</p>
+                <p>{item.CANTIDAD}</p>
                 <div className={styles.buttons}>
-                  <button onClick={() => dispatch(incrementQuantity(item._id))}>
+                  <button onClick={() => dispatch(incrementQuantity(item.ID_PRODUCTO))}>
                     +
                   </button>
-                  <button onClick={() => dispatch(decrementQuantity(item._id))}>
+                  <button onClick={() => dispatch(decrementQuantity(item.ID_PRODUCTO))}>
                     -
                   </button>
-                  <button onClick={() => dispatch(removeFromCart(item._id))}>
+                  <button onClick={() => dispatch(removeFromCart(item.ID_PRODUCTO))}>
                     x
                   </button>
                 </div>
-                <p>$ {item.quantity * item.price}</p>
+                <p>$ {item.CANTIDAD * item.PRECIO}</p>
               </div>
             ))}
-            <h2>Precio Total: $ {getTotalPrice()}</h2>
+            <h2>Precio Total: $ {getTotalPrice().toLocaleString()}</h2>
             <button
               onClick={() => setVentanaOpen(true)}
               className={styles.buttonPagar}
@@ -106,49 +125,46 @@ const Carrito = () => {
                     <div className={`row ${styles.cardlog}`}>
                       <div className="col">
                         <form className={`row ${styles.form}`}
-                              onSubmit={sendEmail}>
-                          <div className="col-md-12 ">
-                            <select
-                              className="form-select my-4"
-                              aria-label="Default select example"
-                              onChange={(e) => setIdType(e.target.value)}
-                              value={IdType}
-                            >
-                              <option defaultValue>
-                                Tipo de Identificacion
-                              </option>
-                              <option value="Cedula">Cédula</option>
-                              <option value="Pasaporte">Pasaporte</option>
-                              <option value="Cedula Extranjeria">
-                                Cédula de Extranjeria
-                              </option>
-                            </select>
-                          </div>
-
-                          <div className="col-md-12 mb-3">
-                            <label htmlFor="documento" className="form-label">
-                              Documento de Identidad
-                            </label>
-
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Número de documento"
-                              aria-label="Documento"
-                              onChange={(e) => setIdNumber(e.target.value)}
-                              value={IdNumber}
-                              required
-                            />
-                          </div>
+                          onSubmit={sendEmail}>
 
                           <div className="col-md-12 mb-3">
                             <label
                               for="validationServerUsername"
                               className="form-label"
                             >
-                              Datos personales
+                              <h3>Datos personales</h3>
+                              <small>Diligencia correctamente tus datos personales para confirmar tu compra</small>
                             </label>
 
+                            <div className="col-md-12 ">
+                              <select
+                                className="form-select my-4"
+                                aria-label="Default select example"
+                                onChange={(e) => setIdType(e.target.value)}
+                                value={IdType}
+                              >
+                                <option defaultValue>
+                                  Tipo de Identificacion
+                                </option>
+                                <option value="Cedula">Cédula</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                                <option value="Cedula Extranjeria">
+                                  Cédula de Extranjeria
+                                </option>
+                              </select>
+                            </div>
+
+                            <div className="col-md-12 mb-3">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Número de documento"
+                                aria-label="Documento"
+                                onChange={(e) => setIdNumber(e.target.value)}
+                                value={IdNumber}
+                                required
+                              />
+                            </div>
                             <input
                               type="email"
                               className="form-control"
@@ -191,20 +207,30 @@ const Carrito = () => {
                               required
                             />
                           </div>
-
+                          <div className="col-12 mb-3">
+                            <input
+                              type="tel"
+                              className="form-control"
+                              placeholder="Número de contacto"
+                              aria-label="Celular"
+                              onChange={(e) => setPhoneNumber(e.target.value)}
+                              value={phoneNumber}
+                              pattern="[0-9]*"
+                              required
+                            />
+                          </div>
                           <div className="col-12 mb-3">
                             <input
                               type="address"
                               id="inputaddress5"
                               class="form-control"
-                              placeholder="Dirección"
+                              placeholder="Dirección de envío"
                               aria-label="Dirección"
                               aria-describedby="addressHelpBlock"
                               onChange={(e) => setAddress(e.target.value)}
                               value={address}
                               required
                             />
-
                             <div id="addressHelpBlock" class="form-text">
                               Debes agregar una dirección.
                             </div>
@@ -214,8 +240,13 @@ const Carrito = () => {
                               type="submit"
                               className="btn btn-primary"
                               style={{ backgroundColor: "#f6a444" }}
+                              onClick={(e) => sendEmail(e)}
+
+                            // sendEmail({ name, lastName, IdNumber, email, address, phoneNumber }, cart);
+                            // setVentanaOpen(false);
+                            // }}
                             >
-                              Generar compra
+                              Confirmar compra
                             </button>
                           </div>
                           <div className={styles.home}>

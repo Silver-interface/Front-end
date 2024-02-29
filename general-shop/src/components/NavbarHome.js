@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
 import styles from '../styles/NavbarHome.module.css';
 import Image from 'next/image';
-import { obtenerCirculosDeColores } from './Producto';
 import { useState } from 'react';
 import Link from 'next/link';
 import Usuario from './Usuario';
+import { ApiProducts } from '@/utils/api-products';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { useAuth } from '@/contexts/authContext';
 
+const NavbarHome = () => {
+  const { isAuthenticated, userData, logout } = useAuth();
 
-const NavbarHome = () => { 
-  const {isAuthenticated, login, logout} = useAuth();
-  console.log("NavbarHome - isAuthenticated:", isAuthenticated);
-
+  const router = useRouter();
+  const cart = useSelector((state) => state.cart);
   const [product, setProduct] = useState([]);  // variable de estado del input
   const [productMatch, setProductMatch] = useState([]); //estado para coincidencia
-  const [selectProduct, setSelectProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);  //para el carousel de la ventana emergente
   const [modalSecciones, setModalSecciones] = useState(false);
 
@@ -27,21 +28,22 @@ const NavbarHome = () => {
     setModalSecciones(false);
   };
 
-  //funcion redireccionamiento a pag. catalogo con el detalle del producto
+  const seccionClick = (seccion) => {
+    router.push(`/catalogo?seccion=${seccion}`);
+  }
+
+  // Calcular la cantidad total de productos en el carrito
+  const totalItemsInCart = cart.reduce((total, item) => total + item.CANTIDAD, 0);
+
+  //funcion redireccionamiento de la barra de busqueda
   const redirectionProduct = (productId) => {
-    setSelectProduct(null);
-    window.location.href = (`/catalogo/${productId}/detalleProducto`);
+    window.location.href = (`/catalogo?producto=${productId}`);
   };
 
   useEffect(() => {
     const loadProduct = async () => {
-      try {
-        const response = await fetch('http://localhost:3002/item/items');
-        const data = await response.json();
-        setProduct(data);
-      } catch (error) {
-        console.error('error fetch data', error);
-      }
+      const response = await ApiProducts();
+      setProduct(response);
     };
     loadProduct();
   }, [])
@@ -61,7 +63,7 @@ const NavbarHome = () => {
       const searchTerms = normalizedText.split(" ");
       let matches = product.filter((product) => {
         // Combinar propiedades relevantes para la búsqueda (descripcion, marca, color, nombre, seccion)
-        const properties = `${product.name} ${product.description} ${product.brand} ${product.section} ${product.color}`;
+        const properties = `${product.NOMBRE_PRODUCTO} ${product.DESCRIPCION} ${product.marca.NOMBRE_MARCA} ${product.seccion.NOMBRE_SECCION} ${product.color.NOMBRE_COLOR} `;
         const combinedProperties = removeTilde(properties).toLowerCase();
         return searchTerms.every((term) => combinedProperties.includes(term));
       });
@@ -74,7 +76,6 @@ const NavbarHome = () => {
 
 
   const totalPages = Math.ceil(productMatch.length / 2);
-
   // Función para manejar el clic en el botón de página anterior
   const clickPrev = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -84,7 +85,6 @@ const NavbarHome = () => {
   const clickNext = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
-
 
 
   return (
@@ -124,14 +124,14 @@ const NavbarHome = () => {
         {modalSecciones && (
           <div className={styles.modalSeccion}>
             <div className={styles.contentModalSeccion}>
-              <div className={styles.seccionMujer}>
+              <div className={styles.seccionMujer} onClick={() => seccionClick('Mujer')}>
                 <Image src={require('@/public/image/mujer.png')}
                   width={170}
                   height={170}
                 />
                 <div>MUJER</div>
               </div>
-              <div className={styles.seccionHombre}>
+              <div className={styles.seccionHombre} onClick={() => seccionClick('Hombre')}>
                 <Image src={require('@/public/image/hombre.png')}
                   width={170}
                   height={170}
@@ -149,22 +149,35 @@ const NavbarHome = () => {
         )}
 
         {/* icono catalogo */}
-        <div className={styles.catalogo}>
-          <Image src={require('@/public/image/Bookmark.png')}
-            width={21}
-            height={40}
-          />
-          <Link href='/catalogo/catalogo' className={styles.refCatalogo}>
-            <p>CATALOGO</p>
-          </Link>
-        </div>
+         <div className={styles.catalogo}>
+          {userData && userData.ID_ROL === 1 ? (
+            <>
+              <Image src={require('@/public/image/admin.png')} width={40} height={40} style={{ width: '35px', height: '35px' }}/>
+              <Link href='/administrarProducto' className={styles.refAdmin}><p>ADMINISTRAR PRODUCTOS</p></Link>
+            </>
+          ) : (
+            <>
+            
+              <Image src={require('@/public/image/Bookmark.png')} width={15} height={15} />
+              <Link href='/catalogo' className={styles.refCatalogo}><p>CATALOGO</p></Link>
+            </>
+          )} 
+        </div> 
+{/* ------------------------------------------ */}
+        {/* <div className={styles.catalogo}>
+          <Image src={require('@/public/image/admin.png')} width={10} height={15} />
+          <Link href='/administrarProducto' className={styles.refAdmin}><p>ADMINISTRAR PRODUCTOS</p></Link>
+        </div> */}
+{/* ------------------------------------------ */}
 
         {/* icono carro */}
         <Link href='/carrito' className={styles.carrito}>
-          <Image src={require('@/public/image/Shopping Cart.png')}
-            width={25}
-            height={20}
-          />
+          <div className={styles.cartIconContainer}>
+            <Image src={require('@/public/image/Shopping Cart.png')} width={25} height={20} />
+            {totalItemsInCart > 0 && (
+              <div className={styles.cart}>{totalItemsInCart}</div>
+            )}
+          </div>
         </Link>
       </div>
 
@@ -192,21 +205,22 @@ const NavbarHome = () => {
                   No se encuentró el producto
                 </div>
               ) : (
-                <div key={product._id} className={styles.cardContent} onClick={() => redirectionProduct(product._id)}>
+                <div key={product.ID_PRODUCTO} className={styles.cardContent} onClick={() => redirectionProduct(product.ID_PRODUCTO)}>
 
                   <div className={styles.card}>
-                    <div key={product._id} className={styles.cardImage}>
+                    <div key={product.ID_PRODUCTO} className={styles.cardImage}>
                       <Image
-                        src={product.image}
+                        src={product.IMAGEN}
                         width={150}
                         height={150}
                       />
                     </div>
                     <div className={styles.cardBody}>
                       <div>
-                        <p>{product.name}</p>
-                        {obtenerCirculosDeColores(product.color)}
-                        <strong> <p>$ {product.price}</p></strong>
+                        {product.NOMBRE_PRODUCTO}
+                        <p>{product.marca.NOMBRE_MARCA}</p>
+                        <div style={{ backgroundColor: product.color.CODIGO_COLOR }} className={styles.colorCircle}> </div>
+                        <p><strong>${product.PRECIO}</strong></p>
                       </div>
                     </div>
                   </div>
@@ -240,7 +254,7 @@ const NavbarHome = () => {
 
       {/* icono usuario */}
       <div className={styles.usuario}>
-      <Usuario isAuthenticated={isAuthenticated} logout={logout} />
+        <Usuario isAuthenticated={isAuthenticated} logout={logout} />
         {!isAuthenticated && (
           // Mostrar botón de registro solo si el usuario no está autenticado
           <button className={styles.botonRegistro}>

@@ -1,43 +1,19 @@
-import React from 'react'
 import styles from '@/src/styles/Producto.module.css';
 import Image from 'next/image';
 
-//mapeo de colores a valores hexadecimales
-const colorMap = {
-  Negro: '#000000',
-  Blanco: '#FFFFFF',
-  Azul: '#0000ff',
-  Gris: '#808080',
-  Rojo: '#ff0000'
-}
 
-export const obtenerCirculosDeColores = (colores) => {
-  if (!colores) return null; 
-  return colores.map((colorKeyword, index) => (
-    <div
-      key={index}
-      style={{ backgroundColor: colorFromBasedeDatos(colorKeyword) }}
-      className={styles.colorCircle}
-    ></div>
-  ));
-};
+function Producto({ ID_PRODUCTO, IMAGEN, NOMBRE_PRODUCTO, COLOR, PRECIO }) {   //(atributos de la api)
 
-// Función para obtener el color correspondiente
-const colorFromBasedeDatos = (keyword) => {
-  return colorMap[keyword] || 'transparent'; // Si la palabra clave no está en el mapeo, usa transparente como valor predeterminado
-};
-
-function Producto({ _id, image, name, color, price }) {   //(atributos de la api)
   return (
-    <div key={_id} className={styles.product}>
+    <div key={ID_PRODUCTO} className={styles.product}>
       <Image className={styles.imageProduct}
-        src={image}
-        width={246}
-        height={278}
+        src={IMAGEN}
+        width={420}
+        height={280}
       />
 
       <div className={styles.nameProduct}>
-        <p>{name}</p>
+        <p>{NOMBRE_PRODUCTO}</p>
         <div className={styles.infoLog}>
           <Image
             src={require('@/public/image/info.png')}
@@ -48,11 +24,9 @@ function Producto({ _id, image, name, color, price }) {   //(atributos de la api
       </div>
 
       <div className={styles.colorPrice}>
-        <div>
-          {obtenerCirculosDeColores(color)}
-        </div>
-
-        <p className={styles.price}><b>${price} </b></p>
+      <div style={{ backgroundColor: COLOR }} className={styles.colorCircle}></div>
+      
+        <p className={styles.price}><b>${PRECIO.toLocaleString()} </b></p>
         <div className={styles.cart}>
           <Image
             src={require('@/public/image/Cart.png')}

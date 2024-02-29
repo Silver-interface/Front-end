@@ -10,57 +10,46 @@ const Login = () => {
   //Declaracion de Hooks
   const router = useRouter();
   const { login } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [CORREO, setCORREO] = useState("");
+  const [CONTRASEÑA, setCONTRASEÑA] = useState("");
 
   const onSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3002/auth/login/", {
+      const res = await fetch("http://localhost:3000/login/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           // 'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          CORREO: CORREO,
+          CONTRASEÑA: CONTRASEÑA,
         }),
       });
       const data = await res.json();
-      console.log("Respuesta del servidor", data);
-      const { token, user } = data;
-
-      if (token) {
-        console.log(user);
-        login(user, token);
+      
+      if (data && data.token) {
+        localStorage.setItem('token', data.token);
+        login(data);
         router.push('/');
-        console.log("Success");
       } else {
         console.error("El servidor no proporcionó un token en la respuesta.");
       }
 
     } catch (error) {
       console.error(error);
-      if (error) {
-        Swal.fire({
-          title: "Usuario no encontrado",
-          text: "Error en los datos ingresados, verifique nuevamente",
-          icon: "warning"
-        });
-      }
-
-      if (error === 500) {
-        Swal.fire({
-          title: "Hubo un problema",
-          text: "Error en el servidor, Intente nuevamente",
-          icon: "warning"
-        });
+      // Mostrar mensaje de error genérico
+      Swal.fire({
+        title: "Usuario no encontrado",
+        text: "Datos ingresados incorrectos, verifique nuevamente.",
+        icon: "error"
+      });
       }
     };
-  }
+  
 
   return (
     <section>
@@ -85,7 +74,7 @@ const Login = () => {
               <div className="mb-2">
                 <label for="exampleInputEmail1" className="form-label">Correo electrónico</label>
                 <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                  onChange={(e) => setEmail(e.target.value)} value={email}
+                  onChange={(e) => setCORREO(e.target.value)} value={CORREO}
                   required />
 
                 <div id="emailHelp" className="form-text">Ingresa un correo al que tengas acceso.</div>
@@ -93,7 +82,7 @@ const Login = () => {
               <div className="mb-3">
                 <label for="exampleInputPassword1" className="form-label">Contraseña</label>
                 <input type="password" className="form-control" id="exampleInputPassword1"
-                  onChange={(e) => setPassword(e.target.value)} value={password}
+                  onChange={(e) => setCONTRASEÑA(e.target.value)} value={CONTRASEÑA}
                   required />
 
                 <div id="passwordHelp" className="form-text">La contraseña debe ser de longitud mínima 5, y debe contener letras mayúsculas, letras minúsculas y números.</div>

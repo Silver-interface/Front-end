@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
-
+import React from 'react';
 import styles from '@/src/styles/App.module.css';
 import NavbarHome from '@/src/components/NavbarHome.js';
 import Separador from '@/src/components/Separador.js';
@@ -10,15 +8,10 @@ import Destacados from '@/src/components/Destacados.js';
 import Secciones from '@/src/components/Secciones.js';
 import Categorias from '@/src/components/Categorias.js';
 import Footer from '@/src/components/Footer.js';
-import { AuthProvider } from '@/contexts/authContext';
-
-
 
 const Home = () => {
-  
   return (
-     
-        <AuthProvider>
+        <>
           <NavbarHome/>
           <Separador />
           <Portada />
@@ -60,8 +53,7 @@ const Home = () => {
           <Secciones />
           <Categorias />
           <Footer />
-
-        </AuthProvider>
+</>
     
       
     );

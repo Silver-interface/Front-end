@@ -1,7 +1,6 @@
 .product {
-    width: 73%;  
-    margin: 5% 3% 5% 3%;
-    border-radius: 61.5px;
+    margin: 5% 3% 10% 3%;
+    border-radius: 40px;
     border: 1px solid #CCBABA;
 }
 
@@ -10,6 +9,7 @@
     display: flex;
     justify-content: space-around;
     width: 95%;
+    margin-top: 2%;
     font-size: 18px;
     margin-left: 2%;
     margin-right: 2%;
@@ -17,16 +17,15 @@
 }
 
 .product img {
-    margin-top: 4%;
     width: 100%;
     display: flex;
     align-items: center;
-    border-radius: 61.5px;
+    border-radius: 40px;
 }
 
  .infoLog {
     display: flex;
-    width: 16%;
+    width: 10%;
     height: 5%;
 }
 

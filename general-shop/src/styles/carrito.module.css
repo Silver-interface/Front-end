@@ -52,6 +52,7 @@
   .buttonPagar .buttonText {
       text-decoration: none;
       color:#fff;
+      font-size: 20px;
   }
   .modalContainer {
     position: fixed;
@@ -71,4 +72,8 @@
     border-radius: 8px;
     max-width: 35%;
    display: flex;
+  }
+
+  .home button {
+    border-radius: 5px;
   }
