@@ -40,6 +40,10 @@ const NavbarHome = () => {
     window.location.href = (`/catalogo?producto=${productId}`);
   };
 
+  const redirectionProductAdmin = (productId) => {
+    window.location.href = (`/administrarProducto?producto=${productId}`);
+  }
+
   useEffect(() => {
     const loadProduct = async () => {
       const response = await ApiProducts();
@@ -163,12 +167,6 @@ const NavbarHome = () => {
             </>
           )} 
         </div> 
-{/* ------------------------------------------ */}
-        {/* <div className={styles.catalogo}>
-          <Image src={require('@/public/image/admin.png')} width={10} height={15} />
-          <Link href='/administrarProducto' className={styles.refAdmin}><p>ADMINISTRAR PRODUCTOS</p></Link>
-        </div> */}
-{/* ------------------------------------------ */}
 
         {/* icono carro */}
         <Link href='/carrito' className={styles.carrito}>
@@ -206,7 +204,7 @@ const NavbarHome = () => {
                 </div>
               ) : (
                 <div key={product.ID_PRODUCTO} className={styles.cardContent} onClick={() => redirectionProduct(product.ID_PRODUCTO)}>
-
+                  
                   <div className={styles.card}>
                     <div key={product.ID_PRODUCTO} className={styles.cardImage}>
                       <Image

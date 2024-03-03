@@ -5,7 +5,7 @@ import Producto from '@/src/components/Producto';
 import TitleProducto from '@/src/components/TituloProducto';
 import styles from '@/src/styles/catalogo.module.css';
 import { ApiProducts } from '@/utils/api-products';
-import ProductoDetalle from '@/src/components/detalleProducto';
+import ProductoDetalle from '@/src/components/DetalleProducto';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 

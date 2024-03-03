@@ -6,7 +6,9 @@ import styles from '@/src/styles/administrarProducto.module.css';
 import { ApiProducts } from '@/utils/api-products';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import EditarProducto from '@/src/components/editarProducto';
+import EditarProducto from '@/src/components/EditarProducto';
+import CrearProducto from '@/src/components/CrearProducto';
+import EliminarProducto from '@/src/components/EliminarProducto';
 
 
 function administrarProducto() {
@@ -16,33 +18,59 @@ function administrarProducto() {
   const [searchText, setSearchText] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [product, setProduct] = useState(null);
-
+  const [productToDelete, setProductToDelete] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 8;
 
   useEffect(() => {
     const loadProducts = async () => {
       const data = await ApiProducts();
       setProducts(data);
     };
+    
     loadProducts();
   }, []);
+
+  //modal editar producto
   const openModal = (product) => {
-    console.log(product);
     setSelectedProduct(product);
     setModalOpen(true);
-    console.log(selectedProduct);
+    router.push(`/administrarProducto?producto=${product.ID_PRODUCTO}`);
   };
-  useEffect(() => {
-    openModal(product);
-    console.log(selectedProduct);
-  }, [selectedProduct]);
 
-  
-  
   const closeModal = () => {
     setModalOpen(false);
+    setSelectedProduct(null);
+    router.push('/administrarProducto');
   };
 
+  //modal crear producto
+  const openModalCreate = () => {
+    setShowModal(true);
+  };
+
+  const closeModalCreate = () => {
+    setShowModal(false);
+    router.push('/administrarProducto');
+  };
+
+  //alerta eliminar producto
+  const openAlert = (product) => {
+    setProductToDelete(product);
+    setIsDeleteModalOpen(true);
+  };
+  
+    const closeAlert = () => {
+      setProductToDelete(null);
+      setIsDeleteModalOpen(false);
+      router.push('/administrarProducto');
+    };
+  
+
+
+  //barra buscadora
   const removeTilde = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
@@ -63,6 +91,18 @@ function administrarProducto() {
     }
   };
 
+  // Paginacion, calcular inicio y final
+  const indexLastCard = currentPage * cardsPerPage;
+  const indexFirstCard = indexLastCard - cardsPerPage;
+  const currentCards = products.slice(indexFirstCard, indexLastCard);
+
+  // Cambiar de página
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const prevPage = () => setCurrentPage(currentPage - 1);
+
+  // Calcular el número total de páginas
+  const totalPages = Math.ceil(products.length / cardsPerPage);
+
 
   return (
     <div>
@@ -82,6 +122,10 @@ function administrarProducto() {
             }}></input>
 
         </div>
+        <div>
+          <button className={styles.createButton} onClick={openModalCreate}> Adicionar producto</button>
+          {showModal && <CrearProducto closeModalCreate={closeModalCreate} />}
+        </div>
         <table className={styles.table} >
           <thead className={styles.header}>
             <tr>
@@ -98,7 +142,7 @@ function administrarProducto() {
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            {(searchText ? productMatch : products).map((product) => (
+            {(searchText ? productMatch : currentCards).map((product) => (
               <tr key={product.ID_PRODUCTO}>
                 <td>{product.ID_PRODUCTO}</td>
                 <td><Image src={product.IMAGEN} width={100} height={100} /></td>
@@ -118,14 +162,29 @@ function administrarProducto() {
                 </td>
                 <td><div className={styles.acciones}>
                   <button className={styles.editButton} onClick={() => openModal(product)}>Editar</button>
-                  <button className={styles.deleteButton}>Eliminar</button>
+                  <button className={styles.deleteButton}   onClick={() =>  openAlert(product)}>Eliminar</button>
+                  {isDeleteModalOpen && <EliminarProducto product={productToDelete} closeAlert={closeAlert} />}
+                 
                 </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {modalOpen && <EditarProducto product={selectedProduct} closeModal={closeModal} />}
+        <EditarProducto selectedProduct={selectedProduct} closeModal={closeModal} />
+      </div>
+      <div className={styles.pagination}>
+        <button onClick={prevPage} disabled={currentPage === 1}>
+          <Image className={styles.back} src={require('@/public/image/backpage.png')}
+            width={30}
+            height={30} />
+          Previous Page</button>
+        <span> {currentPage} de {totalPages}</span>
+        <button onClick={nextPage} disabled={currentPage === totalPages}>Next Page
+          <Image className={styles.next} src={require('@/public/image/nextpage.png')}
+            width={30}
+            height={30} />
+        </button>
       </div>
       <Footer />
 

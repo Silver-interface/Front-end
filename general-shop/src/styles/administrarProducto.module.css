@@ -1,21 +1,23 @@
 .container {
-    width: auto;
-    margin: 1%;
-    border-radius: 10px;
-    overflow-x: auto; 
-    text-align: justify;
+  width: auto;
+  margin: 1%;
+  border-radius: 10px;
+  overflow-x: auto;
+  text-align: justify;
+  padding-bottom: 5%;
 }
 
 .table {
-    border-collapse: collapse;
-    margin-top: 3%;
+  border-collapse: collapse;
+  margin-top: 1%;
 }
+
 .header {
-    background-color:  #fb9828e5;
-    text-align: center;
-  }
-  
-  .table th,
+  background-color: #fb9828e5;
+  text-align: center;
+}
+
+.table th,
 .table td {
   border: 1px solid #dddddd;
   text-align: left;
@@ -23,81 +25,145 @@
 }
 
 .colum {
-    text-align: center;
+  text-align: center;
 }
 
-.editButton, .deleteButton {
-    border-radius: 9px;
-    color: white;
-    font-size: 15px;
+.editButton,
+.deleteButton,
+.createButton {
+  border-radius: 9px;
+  color: white;
+  font-size: 15px;
 }
 
-.editButton {
-    background-color: #f6a444;
+.editButton, 
+.createButton {
+  background-color: #f6a444;
 }
 
 .deleteButton {
-    background-color: red;
+  background-color: red;
 }
 
 .acciones {
-    display: flex;
-    gap:5px;
+  display: flex;
+  gap: 5px;
 }
 
 .Barrabusqueda {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .caja {
-    width: 20%;
-    height: 80%;
-    border-radius: 10px;
-    border-color: #f6a444 ;
-    
+  width: 20%;
+  height: 80%;
+  border-radius: 10px;
+  border-color: #f6a444;
+
 }
 
 .modalContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContent {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 85%;
-   display: flex;
-  }
-  
-  .productDetails {
-    display: flex; 
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .imgProduct {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-    justify-content: center;
-    flex: 1;
-    margin-right: 4%;
-    
-  } 
+.modalContent {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+.imgProduct {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: center;
+  flex: 1;
+  margin-right: 4%;
   
-  .imgProduct img {
-    object-fit: contain;
-    padding-top: 3%;
-    width: 100%;
-    height: auto;
-   
-  }
+}
+
+.imgProduct img {
+  object-fit: contain;
+  padding-top: 3%;
+  width: 100%;
+  height: 68%;
+}
+
+.productDetails {
+  display: flex;
+}
+
+.infoProduct {
+  text-align: justify;
+  padding: 1%;
+  flex: 2;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form1,
+.form2 {
+  flex: 1;
+  margin: 0 2%;
+}
+
+.form1 div,
+.form2 div {
+  margin-bottom: 20px;
+  
+}
+
+.colorCircle {
+  width: 30px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: 20px;
+  border: 1px solid #000; 
+  display: inline-block;
+  cursor: pointer;
+
+}
+
+.close {
+  cursor: pointer;
+}
+.submit {
+  margin-left: 77%;
+ 
+}
+
+
+.pagination {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+  gap: 14px;
+}
+
+
+.pagination button {
+  background-color: transparent;
+  color: #F6A444;
+  border: none;
+  
+}

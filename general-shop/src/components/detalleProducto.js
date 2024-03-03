@@ -100,14 +100,26 @@ function ProductoDetalle({ product, onClose }) {
 
                 </div>
 
-                <button className={styles.carrito} onClick={() => dispatch(addToCart({
-                  ID_PRODUCTO: product.ID_PRODUCTO,
-                  IMAGEN: product.IMAGEN,
-                  NOMBRE_PRODUCTO: product.NOMBRE_PRODUCTO,
-                  TALLA: tallaSeleccionada,  // Aquí pasamos la talla seleccionada
-                  CANTIDAD: cantidad,  // Aquí pasamos la cantidad seleccionada
-                  PRECIO: product.PRECIO
-                }))}>
+                <button className={styles.carrito}
+                  onClick={() => {
+                    if (obtenerStockporTalla(product, tallaSeleccionada) > 0 && cantidad <= obtenerStockporTalla(product, tallaSeleccionada)) {
+                      dispatch(addToCart({
+                        ID_PRODUCTO: product.ID_PRODUCTO,
+                        IMAGEN: product.IMAGEN,
+                        NOMBRE_PRODUCTO: product.NOMBRE_PRODUCTO,
+                        TALLA: tallaSeleccionada,
+                        CANTIDAD: cantidad,
+                        PRECIO: product.PRECIO
+                      }));
+                    } else {
+                      alert("No hay suficiente stock disponible");
+                    }
+                  }}
+                  disabled={
+                    obtenerStockporTalla(product, tallaSeleccionada) === 0 ||
+                    cantidad > obtenerStockporTalla(product, tallaSeleccionada)
+                  }
+                >
                   <b>Agregar producto</b>
                   <Image src={require('@/public/image/Shopping Cart.png')} width={20} height={20} />
                 </button>
