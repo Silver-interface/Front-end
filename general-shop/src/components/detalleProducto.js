@@ -103,8 +103,7 @@ function ProductoDetalle({ product, onClose }) {
                 <button className={styles.carrito}
                   onClick={() => {
                     if (obtenerStockporTalla(product, tallaSeleccionada) > 0 && cantidad <= obtenerStockporTalla(product, tallaSeleccionada)) {
-                      dispatch(addToCart({
-                        ID_PRODUCTO: product.ID_PRODUCTO,
+                      dispatch(addToCart({ID_PRODUCTO: product.ID_PRODUCTO,
                         IMAGEN: product.IMAGEN,
                         NOMBRE_PRODUCTO: product.NOMBRE_PRODUCTO,
                         TALLA: tallaSeleccionada,

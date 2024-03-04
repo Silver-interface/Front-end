@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUserData(null);
     localStorage.removeItem('userData');
+    localStorage.removeItem('token');
   };
 
   return (

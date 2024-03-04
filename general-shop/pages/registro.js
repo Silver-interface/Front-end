@@ -69,20 +69,20 @@ const Registro = () => {
       });
       return;
     }
-    
+
+
     try {
       const res = await fetch("http://localhost:3000/register/", {
-
         method: 'POST',
         body: JSON.stringify({ CORREO, CONTRASEÑA, NOMBRE_USUARIO, APELLIDO_USUARIO, DOCUMENTO, TIPO_DOCUMENTO }),
-        headers: {  //valor que espera el backend para que entienda que es un objeto json
+        headers: {
           'Content-Type': 'application/json'
         },
       });
 
-      const data = await res.text();
+      const data = await res.json();
 
-      if (data === "ALREADY_USER") {
+      if (data.error === "ALREADY_USER") {
         Swal.fire({
           title: "Usuario existente",
           text: "El usuario ya ha sido creado, puedes ingresar",
@@ -98,9 +98,14 @@ const Registro = () => {
         router.push('/login');
       }
     } catch (error) {
-      console.log(error);
-    };
-  }
+      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+        icon: "error"
+      });
+    }
+  };
 
   return (
     <section>

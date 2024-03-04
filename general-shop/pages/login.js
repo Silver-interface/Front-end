@@ -36,15 +36,17 @@ const Login = () => {
         login(data);
         router.push('/');
       } else {
-        console.error("El servidor no proporcionó un token en la respuesta.");
-      }
-
-    } catch (error) {
-      console.error(error);
-      // Mostrar mensaje de error genérico
       Swal.fire({
         title: "Usuario no encontrado",
         text: "Datos ingresados incorrectos, verifique nuevamente.",
+        icon: "error"
+      });
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.",
         icon: "error"
       });
       }

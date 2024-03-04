@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '@/src/styles/Categorias.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
+
 
 function Categorias() {
   return (
@@ -11,18 +13,24 @@ function Categorias() {
       />
       <div className={styles.contenedor}>
         <div className={styles.seccionMujer}>
+          <Link href="/catalogo?seccion=Mujer">
           <Image src={require('@/public/image/mujer.png')}
             width={280}
             height={279}
           />
-          <div>MUJER</div>
+           </Link>
+          <div>MUJER</div>      
+          
         </div>
         <div className={styles.seccionHombre}>
+          <Link href="/catalogo?seccion=Hombre">
           <Image src={require('@/public/image/hombre.png')}
             width={279}
             height={279}
           />
+          </Link>
           <div>HOMBRE</div>
+          
         </div>
       </div>
 

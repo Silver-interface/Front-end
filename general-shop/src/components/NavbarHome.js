@@ -40,9 +40,6 @@ const NavbarHome = () => {
     window.location.href = (`/catalogo?producto=${productId}`);
   };
 
-  const redirectionProductAdmin = (productId) => {
-    window.location.href = (`/administrarProducto?producto=${productId}`);
-  }
 
   useEffect(() => {
     const loadProduct = async () => {
