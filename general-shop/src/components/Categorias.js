@@ -14,23 +14,23 @@ function Categorias() {
       <div className={styles.contenedor}>
         <div className={styles.seccionMujer}>
           <Link href="/catalogo?seccion=Mujer">
+          <div>MUJER</div> 
           <Image src={require('@/public/image/mujer.png')}
             width={280}
             height={279}
           />
            </Link>
-          <div>MUJER</div>      
+               
           
         </div>
         <div className={styles.seccionHombre}>
           <Link href="/catalogo?seccion=Hombre">
+          <div>HOMBRE</div>
           <Image src={require('@/public/image/hombre.png')}
             width={279}
             height={279}
           />
           </Link>
-          <div>HOMBRE</div>
-          
         </div>
       </div>
 

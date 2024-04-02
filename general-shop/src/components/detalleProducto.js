@@ -62,7 +62,6 @@ function ProductoDetalle({ product, onClose }) {
 
   const VentanaClose = () => {
     onClose();
-
   }
 
   return (
@@ -122,7 +121,6 @@ function ProductoDetalle({ product, onClose }) {
                   <b>Agregar producto</b>
                   <Image src={require('@/public/image/Shopping Cart.png')} width={20} height={20} />
                 </button>
-
 
                 <p><b>Sección</b>: {product.seccion.NOMBRE_SECCION}</p>
                 <p><b>Descripción</b>: {product.DESCRIPCION}</p>

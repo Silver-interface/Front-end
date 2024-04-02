@@ -1,26 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity, removeFromCart, removeAllFromCart, } from "../libs/cartSlice";
 import NavbarHome from "@/src/components/NavbarHome";
 import styles from "@/src/styles/carrito.module.css";
 import { useAuth } from '@/contexts/authContext';
+import Swal from "sweetalert2";
+import TituloCarrito from "@/src/components/TituloCarrito";
 
 const Carrito = () => {
-  const { userData } = useAuth();
-
+  const { userData, isAuthenticated } = useAuth();
   const [VentanaOpen, setVentanaOpen] = useState(false);
-  const [name, setName] = useState(userData.NOMBRE_USUARIO || '');
-  const [lastName, setLastName] = useState(userData.APELLIDO_USUARIO || '');
-  const [IdType, setIdType] = useState(userData.TIPO_DOCUMENTO || '');
-  const [IdNumber, setIdNumber] = useState(userData.DOCUMENTO || '');
-  const [email, setEmail] = useState(userData.CORREO || '');
+  const [ID_USUARIO, setID_USUARIO] = useState('');
+  const [name, setName] = useState( '');
+  const [lastName, setLastName] = useState('');
+  const [IdType, setIdType] = useState('');
+  const [IdNumber, setIdNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
   const cart = useSelector((state) => state.cart);
-
   const dispatch = useDispatch();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setName(userData.NOMBRE_USUARIO || '');
+      setLastName(userData.APELLIDO_USUARIO || '');
+      setIdType(userData.TIPO_DOCUMENTO || '');
+      setIdNumber(userData.DOCUMENTO || '');
+      setEmail(userData.CORREO || '');
+      setID_USUARIO(userData.ID_USUARIO || '');
+    }
+  }, [isAuthenticated, userData]); 
+
+
+  const clearCart = ()=> {
+    dispatch(removeAllFromCart()); // Limpiar el carrito en el estado global
+    localStorage.removeItem('cart'); // Limpiar el carrito en el estado local
+  }
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -35,28 +64,27 @@ const Carrito = () => {
       alert("Por favor, complete todos los campos del formulario.");
       return; // Detener la ejecución de la función si el formulario no está completo
     }
-
     const cartconPrecioTotal = cart.map(item => ({
       ...item,
       PRECIO: item.CANTIDAD * item.PRECIO
     }));
     
-    console.log('Cart original:', cart);
-    console.log('Cart con precio por cantidad:', cartconPrecioTotal);
+    const ID_VENTA = 1;
+    const response = await fetch("http://localhost:3000/ventas", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ID_USUARIO, ID_VENTA, email, address, name, lastName, IdNumber, IdType, phoneNumber, cart: cartconPrecioTotal})
+    });
   
-    // Si todos los campos están completos, enviar el formulario
-    // const response = await fetch("http://localhost:3000/sendEmail", {
-    //   method: 'POST',
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email, address, name, lastName, IdNumber, IdType, phoneNumber, cart: precioPorCantidad})
-    // });
-  // console.log(response.body);
-    alert('¡Compra exitosa!');
-    dispatch(removeAllFromCart());
+  Swal.fire({
+    title: "Confirmación exitosa",
+    text: "Gracias por tu compra",
+    icon: "success"
+  });
   
-    // Limpiar los campos del formulario o restablecerlos a su valor inicial si es necesario
+    // Limpiar los campos del formulario o restablecerlos a su valor inicial
     setName('');
     setLastName('');
     setIdType('');
@@ -64,14 +92,16 @@ const Carrito = () => {
     setEmail('');
     setAddress('');
     setPhoneNumber('');
+    clearCart();
   };
 
   return (
     <>
       <NavbarHome />
+      <TituloCarrito/>
       <div className={styles.container}>
         {cart.length === 0 ? (
-          <h1>Tu carrito está vacío!</h1>
+          <h1>¡Tu carrito de compras está vacío!</h1>
         ) : (
           <>
             <div className={styles.header}>

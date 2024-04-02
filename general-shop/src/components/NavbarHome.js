@@ -8,12 +8,12 @@ import { ApiProducts } from '@/utils/api-products';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { useAuth } from '@/contexts/authContext';
+import dynamic from 'next/dynamic';
 
 const NavbarHome = () => {
   const { isAuthenticated, userData, logout } = useAuth();
-
   const router = useRouter();
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);  //redux
   const [product, setProduct] = useState([]);  // variable de estado del input
   const [productMatch, setProductMatch] = useState([]); //estado para coincidencia
   const [currentPage, setCurrentPage] = useState(1);  //para el carousel de la ventana emergente
@@ -97,20 +97,20 @@ const NavbarHome = () => {
           width={59}
           height={52}
         />
-        <a className={styles.ref} href='/'>
+        <Link className={styles.ref} href='/'>
           <h1 className={styles.nombreTienda}><b>General Shop</b></h1>
-        </a>
+        </Link>
       </div>
 
       {/* icono home */}
       <div className={styles.categorias}>
         <div className={styles.home}>
-          <a href='/'>
+          <Link href='/'>
             <Image src={require('@/public/image/home.png')}
               width={30}
               height={30}
             />
-          </a>
+          </Link>
         </div>
 
         {/* icono secciones */}
@@ -253,7 +253,7 @@ const NavbarHome = () => {
         {!isAuthenticated && (
           // Mostrar botón de registro solo si el usuario no está autenticado
           <button className={styles.botonRegistro}>
-            <a className={styles.refB} href='/registro'><b>Registrate</b> </a>
+            <Link className={styles.refB} href='/registro'><b>Registrate</b> </Link>
           </button>
         )}
       </div>
@@ -261,4 +261,4 @@ const NavbarHome = () => {
   );
 };
 
-export default NavbarHome;
+export default dynamic(() => Promise.resolve(NavbarHome), {ssr: false}) 

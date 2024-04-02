@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/authContext';
 import styles from '../styles/NavbarHome.module.css';
+import Link from 'next/link';
 
 function Usuario() {
   const { isAuthenticated, userData, logout } = useAuth();
@@ -17,9 +18,9 @@ function Usuario() {
           </div>
         </>
       ) : (
-        <a href='/login'>
+        <Link href='/login'>
           <Image src={require('@/public/image/User.png')} width={45} height={45} />
-        </a>
+        </Link>
       )}
     </div>
   );

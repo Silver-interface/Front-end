@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2';
 import { useAuth } from '@/contexts/authContext';
+import Link from 'next/link';
 
 const Login = () => { 
 
@@ -96,7 +97,7 @@ const Login = () => {
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#f6a444' }}>Iniciar Sesión</button>
               <div className={styles.registrate}>
                 O si no tienes una cuenta <br></br>
-                <a href='/registro' style={{ color: 'inherit', textDecoration: 'inherit' }} ><strong>REGISTRATE</strong></a>
+                <Link href='/registro' style={{ color: 'inherit', textDecoration: 'inherit' }} ><strong>REGISTRATE</strong></Link>
               </div>
               <div className={styles.home}>
                 < a href='/'><Image src="/image/home.png"

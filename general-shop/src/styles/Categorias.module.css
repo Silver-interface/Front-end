@@ -19,30 +19,7 @@
     justify-content: space-around;
 }
 
-.seccionMujer {
-    width: 25%;
-    height: 30%;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-}
-
-.seccionMujer div {
-    font-size: 60px;
-    display: flex;
-    position: absolute;
-    color: white;
-    margin-right: 4%;
-    cursor: pointer;
-}
-
-.seccionMujer img {
-    width: 90%;
-    height: 90%;
-    opacity: 1;
-}
-
+.seccionMujer,
 .seccionHombre {
     width: 25%;
     height: 30%;
@@ -52,41 +29,26 @@
     align-items: center;
 }
 
+.seccionMujer div,
 .seccionHombre div {
     font-size: 60px;
     display: flex;
     position: absolute;
     color: white;
-    margin-right: 7%;
+    margin-left: 10%;
+    margin-top: 20%;
     cursor: pointer;
 }
 
+.seccionHombre div {
+    margin-left: 1%;
+}
+.seccionMujer img,
 .seccionHombre img {
     width: 90%;
     height: 90%;
     opacity: 1;
 }
 
-.seccionEco {
-    width: 25%;
-    height: 30%;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-}
-
-.seccionEco img {
-    width: 90%;
-    height: 90%;
-    opacity: 1;
-}
-
-.seccionEco div {
-    font-size: 50px;
-    display: flex;
-    position: absolute;
-    color: white;
-}
 
 

@@ -4,7 +4,7 @@ import { cartReducer, saveCartMiddleware } from './cartSlice'; // Ajusta la impo
 const store = configureStore({
   reducer: {
     cart: cartReducer,
-    // Otros reducers si los tienes
+  
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(saveCartMiddleware),

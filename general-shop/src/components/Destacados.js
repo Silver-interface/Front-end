@@ -1,37 +1,87 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '@/src/styles/Destacados.module.css';
 import Image from 'next/image';
+import Producto from './Producto';
+import { useRouter } from 'next/router';
+import ProductoDetalle from './DetalleProducto';
 
-function Destacados(props) {
-  return (
+function Destacados() {
+  const router = useRouter();
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  
 
-    <div className={styles.producto}>
-      <Image className={styles.imagenProducto}
-        src={require(`@/public/image/${props.imagen}.jpeg`)}
-        width={246}
-        height={278}
-      />
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/productos/detalle");
+        const data = await response.json(); 
+        setProducts(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error al cargar productos:", error);
+      }
+    };
+    loadProducts();
 
-      <div className={styles.descripcionProducto}>
-        <p>{props.nombre}</p>
+     // Leer el parámetro de la URL para obtener el producto seleccionado
+     const loadSelectedProduct = async () => {
+      const { producto } = router.query;
+      if (producto && products.length > 0) {
+        const selected = products.find((p) => p.ID_PRODUCTO === Number(producto));
+        setSelectedProduct(selected);
+      }
+    };
+    loadSelectedProduct();
+  }, [router.query]); // Agregar router.query a la dependencia de useEffect
+
+  const openDetalleProducto = (product) => {
+    setSelectedProduct(product);
+    router.push(`/catalogo?producto=${product.ID_PRODUCTO}`);
+  };
+
+  const closeDetalleProducto = () => {
+    setSelectedProduct(null);
+    router.push('/catalogo');
+  };
+
+
+  // Renderizar solo el producto seleccionado si está presente
+  if (selectedProduct) {
+    return (
+      <div>
+        <ProductoDetalle product={selectedProduct} onClose={closeDetalleProducto} />
       </div>
+    );
+  }
 
-      <div className={styles.colorPrecio}>
-        <div className={styles.color}>
-          {props.colores && props.colores.map((color, index) => (  //opciones de color a traves de props
-            <div id={index} style={{ backgroundColor: color }}> </div>
-          ))}
-        </div>
+  //prueba
+  const idsToRender = [12, 24, 18, 48, 23];
+  const productosFiltrados = products.filter(producto => idsToRender.includes(producto.ID_PRODUCTO));
 
-        <p className={styles.precio}><b>{props.precio} </b></p>
-        <Image className={styles.cart}
-          src={require('@/public/image/Cart.png')}
-          width={25}
-          height={25}
-        />
+
+  return (
+    <div>
+      <div className={styles.Card}>
+        {productosFiltrados.map((product) => (
+          <div key={product.ID_PRODUCTO} onClick={() => openDetalleProducto(product)}>
+            <Producto
+              ID_PRODUCTO={product.ID_PRODUCTO}
+              IMAGEN={product.IMAGEN}
+              NOMBRE_PRODUCTO={product.NOMBRE_PRODUCTO}
+              COLOR={product.color.CODIGO_COLOR}
+              PRECIO={product.PRECIO}
+            />
+          </div>
+        ))}
+        {/* Renderiza el detalle del producto si está seleccionado */}
+        {selectedProduct && (
+          <ProductoDetalle product={selectedProduct} onClose={closeDetalleProducto} />
+        )}
       </div>
     </div>
   );
 }
 
+    
 export default Destacados;

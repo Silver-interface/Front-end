@@ -4,6 +4,7 @@ import styles from '../src/styles/registro.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
+import Link from 'next/link'
 
 //componente alert
 const Toast = Swal.mixin({
@@ -194,19 +195,19 @@ const Registro = () => {
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#f6a444' }}>Registrarse</button>
               </div>
               <div className={styles.redlogin} >
-                <a href="/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                <Link href="/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                   <Image src="/image/maleUser.png"
                     width={47}
                     height={47}>
                   </Image>
                   YA TIENES UNA CUENTA?
-                </a>
+                </Link>
               </div>
               <div className={styles.home}>
-                < a href='/'><Image src="/image/home.png"
+                <Link href='/'><Image src="/image/home.png"
                   width={30}
                   height={30}
-                ></Image></a>Regresar
+                ></Image></Link>Regresar
               </div>
             </form>
           </div>
