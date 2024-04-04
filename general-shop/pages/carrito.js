@@ -22,18 +22,6 @@ const Carrito = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 4000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    }
-  });
-
   useEffect(() => {
     if (isAuthenticated) {
       setName(userData.NOMBRE_USUARIO || '');
@@ -42,6 +30,8 @@ const Carrito = () => {
       setIdNumber(userData.DOCUMENTO || '');
       setEmail(userData.CORREO || '');
       setID_USUARIO(userData.ID_USUARIO || '');
+    }else {
+      setID_USUARIO(2);
     }
   }, [isAuthenticated, userData]); 
 
@@ -64,19 +54,15 @@ const Carrito = () => {
       alert("Por favor, complete todos los campos del formulario.");
       return; // Detener la ejecución de la función si el formulario no está completo
     }
-    const cartconPrecioTotal = cart.map(item => ({
-      ...item,
-      PRECIO: item.CANTIDAD * item.PRECIO
-    }));
-    
-    const ID_VENTA = 1;
     const response = await fetch("http://localhost:3000/ventas", {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ID_USUARIO, ID_VENTA, email, address, name, lastName, IdNumber, IdType, phoneNumber, cart: cartconPrecioTotal})
+      body: JSON.stringify({ID_USUARIO, email, address, name, lastName, IdNumber, IdType, phoneNumber, cart})
     });
+    
+   
   
   Swal.fire({
     title: "Confirmación exitosa",

@@ -32,8 +32,8 @@ function ProductoDetalle({ product, onClose }) {
 
   //logica para ingresar cantidad deseada
   const incrementarCantidad = () => {
-    //verificar si la cantidad actual es menor al stock antes de incrementar
-    if (cantidad < obtenerStockporTalla(product, tallaSeleccionada)) {
+    const stockDisponible = obtenerStockporTalla(product, tallaSeleccionada)?.STOCK || 0;
+    if (cantidad < stockDisponible) {
       setCantidad(cantidad + 1);
     }
   };
@@ -54,11 +54,13 @@ function ProductoDetalle({ product, onClose }) {
   const obtenerStockporTalla = (product, talla) => {
     if (product && product.inventario) {
       const inventario = product.inventario;
-      const tallaInfo = inventario.find((item) => item.talla.NOMBRE_TALLA === talla);
-      return tallaInfo ? tallaInfo.STOCK : 0;
+      // const tallaInfo = inventario.find((item) => item.talla.NOMBRE_TALLA === talla);
+      return inventario.find((item) => item.talla.NOMBRE_TALLA === talla);
     }
-    return 0; //valor predeterminado si no encuentra talla
+    return null;
   };
+  const tallaInfo = obtenerStockporTalla(product, tallaSeleccionada);
+
 
   const VentanaClose = () => {
     onClose();
@@ -81,7 +83,7 @@ function ProductoDetalle({ product, onClose }) {
               </div>
               <div className={styles.infoProduct}>
                 <strong>{product.NOMBRE_PRODUCTO}</strong> <br />
-                <small> Ref: {product.ID_PRODUCTO}  |  {obtenerStockporTalla(product, tallaSeleccionada)} Artículos disponibles</small><br />
+                <small> Ref: {product.ID_PRODUCTO}  |  {obtenerStockporTalla(product, tallaSeleccionada)?.STOCK} Artículos disponibles</small><br />
                 <strong>${product.PRECIO}  </strong><br />
                 <div className={styles.selectStock}>
                   <select value={tallaSeleccionada} onChange={CambiodeTalla} className={styles.select}>
@@ -101,11 +103,14 @@ function ProductoDetalle({ product, onClose }) {
 
                 <button className={styles.carrito}
                   onClick={() => {
-                    if (obtenerStockporTalla(product, tallaSeleccionada) > 0 && cantidad <= obtenerStockporTalla(product, tallaSeleccionada)) {
-                      dispatch(addToCart({ID_PRODUCTO: product.ID_PRODUCTO,
+                    const stockDisponible = obtenerStockporTalla(product, tallaSeleccionada)?.STOCK || 0;
+                    if (stockDisponible > 0 && cantidad <= stockDisponible) {
+                      dispatch(addToCart({
+                        ID_PRODUCTO: product.ID_PRODUCTO,
                         IMAGEN: product.IMAGEN,
                         NOMBRE_PRODUCTO: product.NOMBRE_PRODUCTO,
                         TALLA: tallaSeleccionada,
+                        ID_TALLA: tallaInfo.ID_TALLA,
                         CANTIDAD: cantidad,
                         PRECIO: product.PRECIO
                       }));
@@ -137,6 +142,7 @@ function ProductoDetalle({ product, onClose }) {
                 />
               </div>
             </div>
+
           </div>
         </div>
       )}

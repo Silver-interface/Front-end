@@ -107,8 +107,10 @@ function EditarProducto({ closeModal, selectedProduct }) {
       prevState.map(talla =>
         talla.ID_TALLA === idTalla ? { ...talla, STOCK: newStock } : talla
       )
+      
     );
   };
+  
 
   //Manejar cambio de color
   const colorChange = (newColor) => {

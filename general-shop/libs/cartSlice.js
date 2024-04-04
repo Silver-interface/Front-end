@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
   initialState: loadCartLocalStorage(),
   reducers: {
     addToCart(state, action) {
-      const { ID_PRODUCTO, IMAGEN, NOMBRE_PRODUCTO, TALLA, CANTIDAD, PRECIO } = action.payload;
+      const { ID_PRODUCTO, IMAGEN, NOMBRE_PRODUCTO, TALLA, ID_TALLA, CANTIDAD, PRECIO } = action.payload;
       const existingProductIndex = state.findIndex(item => item.ID_PRODUCTO === ID_PRODUCTO && item.TALLA === TALLA);
       if (existingProductIndex !== -1) {
         // Si el producto ya está en el carrito, actualiza la cantidad
@@ -26,6 +26,7 @@ export const cartSlice = createSlice({
           ID_PRODUCTO,
           IMAGEN,
           NOMBRE_PRODUCTO,
+          ID_TALLA,
           TALLA,
           CANTIDAD,
           PRECIO
